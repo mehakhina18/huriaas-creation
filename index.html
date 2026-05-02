@@ -13,11 +13,9 @@ body {
     color: #333;
 }
 
-/* HEADER */
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 30px;
+    text-align: center;
+    padding: 20px;
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
@@ -26,29 +24,12 @@ header h1 {
     color: #d8a7b1;
 }
 
-/* NAV */
-nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #555;
-}
-
-/* HERO */
 .hero {
     text-align: center;
-    padding: 60px 20px;
+    padding: 50px;
     background: linear-gradient(#f8e1e7, #fff);
 }
 
-.hero h2 {
-    font-size: 32px;
-}
-
-.hero p {
-    color: #666;
-}
-
-/* PRODUCTS */
 .products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -62,11 +43,6 @@ nav a {
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
 }
 
 .card img {
@@ -81,20 +57,42 @@ nav a {
 }
 
 .btn {
-    display: inline-block;
     padding: 10px 15px;
     background: #d8a7b1;
     color: white;
     text-decoration: none;
     border-radius: 20px;
+    margin: 5px;
+    display: inline-block;
 }
 
-/* FOOTER */
+.btn2 {
+    padding: 10px 15px;
+    background: #6c9a8b;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    margin: 5px;
+    display: inline-block;
+}
+
+form input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+#paymentBox {
+    display: none;
+    background: #f8e1e7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 footer {
     text-align: center;
     padding: 20px;
     background: #f8e1e7;
-    margin-top: 20px;
 }
 </style>
 </head>
@@ -103,16 +101,11 @@ footer {
 
 <header>
 <h1>Huriaa's Creation 💝</h1>
-<nav>
-<a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">Contact</a>
-</nav>
 </header>
 
 <section class="hero">
 <h2>Elegant Handmade Gifts</h2>
-<p>Make your moments special with love & creativity</p>
+<p>Made with love for your special moments</p>
 </section>
 
 <section class="products">
@@ -121,21 +114,48 @@ footer {
 <img src="product1.jpg">
 <h3>Luxury Gift Basket</h3>
 <div class="price">Rs. 2500</div>
-<a class="btn" href="https://wa.me/923152950176?text=I want to order Luxury Gift Basket">Order Now</a>
+<a class="btn" href="#orderForm">Order Now</a>
+<a class="btn2" href="https://wa.me/923152950176?text=Hi, I want to customize Luxury Gift Basket">Customize</a>
 </div>
 
 <div class="card">
 <img src="product2.jpg">
 <h3>Decor Set</h3>
 <div class="price">Rs. 1800</div>
-<a class="btn" href="https://wa.me/923152950176?text=I want to order Decor Set">Order Now</a>
+<a class="btn" href="#orderForm">Order Now</a>
+<a class="btn2" href="https://wa.me/923152950176?text=Hi, I want to customize Decor Set">Customize</a>
 </div>
 
-<div class="card">
-<img src="product3.jpg">
-<h3>Custom Gift</h3>
-<div class="price">Rs. 3000</div>
-<a class="btn" href="https://wa.me/923152950176?text=I want to order Custom Gift">Order Now</a>
+</section>
+
+<section id="orderForm" style="padding:40px;">
+<h2>Place Your Order 💝</h2>
+
+<form onsubmit="showPayment(); return false;">
+<input type="text" placeholder="Your Name" required>
+<input type="text" placeholder="Phone Number" required>
+<input type="text" placeholder="Address" required>
+
+<button type="submit" class="btn">Continue to Payment</button>
+</form>
+
+<br>
+
+<div id="paymentBox">
+<h3>Payment Details 💳</h3>
+
+<p><b>JazzCash Number:</b> 03152950176</p>
+<p><b>Account Name:</b> Mehak Hina</p>
+
+<br>
+
+<p><b>Bank Transfer:</b></p>
+<p>Account Title: MOHSIN</p>
+<p>Account Number: 00300108549036</p>
+
+<br>
+
+<p>📸 Payment karne ke baad screenshot WhatsApp par bhej dein.</p>
 </div>
 
 </section>
@@ -143,6 +163,12 @@ footer {
 <footer>
 <p>© 2026 Huriaa's Creation | Made with 💖</p>
 </footer>
+
+<script>
+function showPayment() {
+    document.getElementById("paymentBox").style.display = "block";
+}
+</script>
 
 </body>
 </html>
