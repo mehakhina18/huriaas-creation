@@ -127,12 +127,12 @@ footer{text-align:center;padding:20px;background:#fff}
 <input type="text" id="search" placeholder="Search products..." onkeyup="search()">
 </div>
 
-<!-- FILTERS -->
 <div class="filters">
 <button onclick="filter('all')">All</button>
+<button onclick="filter('babyboy')">Baby Boy</button>
+<button onclick="filter('babygirl')">Baby Girl</button>
 <button onclick="filter('women')">Women</button>
 <button onclick="filter('men')">Men</button>
-<button onclick="filter('baby')">Baby</button>
 </div>
 
 <!-- PRODUCTS -->
@@ -231,6 +231,19 @@ function pay(){
 document.getElementById("payment").style.display="block";
 }
 
+  <script>
+function filter(c){
+let cards=document.getElementsByClassName("card");
+
+for(let i=0;i<cards.length;i++){
+cards[i].style.display="none";
+
+if(c=="all" || cards[i].classList.contains(c)){
+cards[i].style.display="flex";
+}
+}
+}
+</script>
 </script>
 
 </body>
