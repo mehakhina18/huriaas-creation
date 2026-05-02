@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huriaa's Creation</title>
+
+<style>
+body{margin:0;font-family:Segoe UI;background:#fffafc;color:#333}
+
+/* HEADER */
+header{
+display:flex;justify-content:space-between;align-items:center;
+padding:15px 25px;background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,0.05)
+}
+header h1{color:#d8a7b1}
+
+/* NAV */
+nav a{margin:0 10px;text-decoration:none;color:#555}
+
+/* HERO */
+.hero{
+text-align:center;padding:50px;
+background:linear-gradient(#f8e1e7,#fff)
+}
+
+/* SEARCH */
+.search{
+text-align:center;margin:15px
+}
+.search input{
+padding:10px;width:60%;
+border-radius:20px;border:1px solid #ddd
+}
+
+/* FILTERS */
+.filters{text-align:center;margin:10px}
+.filters button{
+padding:8px 12px;margin:5px;
+border:none;border-radius:20px;
+background:#d8a7b1;color:white;cursor:pointer
+}
+
+/* PRODUCTS */
+.products{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;padding:20px
+}
+
+.card{
+background:#fff;padding:15px;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+transition:0.3s
+}
+.card:hover{transform:scale(1.03)}
+.card img{width:100%;border-radius:10px}
+
+.price{color:#d8a7b1;font-weight:bold}
+
+.desc{font-size:13px;color:#666}
+
+/* BUTTONS */
+.btn{
+padding:8px 10px;
+background:#d8a7b1;
+color:#fff;
+text-decoration:none;
+border-radius:20px;
+display:inline-block;
+margin:5px
+}
+
+.btn2{
+padding:8px 10px;
+background:#6c9a8b;
+color:#fff;
+text-decoration:none;
+border-radius:20px;
+display:inline-block
+}
+
+/* CART */
+.cartBox{
+position:fixed;right:10px;top:80px;
+background:white;padding:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+border-radius:10px
+}
+
+/* CHECKOUT */
+#checkout{
+padding:30px;background:#fff0f5
+}
+
+#payment{
+display:none;background:#ffe4ec;
+padding:15px;border-radius:10px
+}
+
+/* FOOTER */
+footer{text-align:center;padding:20px;background:#fff}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Huriaa's Creation 💝</h1>
+<nav>
+<a href="#">Home</a>
+<a href="#products">Shop</a>
+<a href="#checkout">Checkout</a>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<h2>Elegant Handmade Gifts</h2>
+<p>Premium gifts for every special moment</p>
+</section>
+
+<!-- SEARCH -->
+<div class="search">
+<input type="text" id="search" placeholder="Search products..." onkeyup="search()">
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+<button onclick="filter('all')">All</button>
+<button onclick="filter('women')">Women</button>
+<button onclick="filter('men')">Men</button>
+<button onclick="filter('baby')">Baby</button>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+
+<div class="card women men">
+<img src="product1.jpg">
+<h3>Chocolate Bouquet</h3>
+<div class="price">Rs. 12,000</div>
+<p class="desc">Luxury chocolate bouquet for all occasions.</p>
+<a class="btn" onclick="select('Chocolate Bouquet')" href="#checkout">Order</a>
+<a class="btn2" href="#">Customize</a>
+</div>
+
+<div class="card women">
+<img src="product2.jpg">
+<h3>Makeup Bouquet</h3>
+<div class="price">Rs. 7,000</div>
+<p class="desc">Elegant makeup gift set for women.</p>
+<a class="btn" onclick="select('Makeup Bouquet')" href="#checkout">Order</a>
+<a class="btn2">Customize</a>
+</div>
+
+<div class="card women">
+<img src="product3.jpg">
+<h3>Jhumka Bouquet</h3>
+<div class="price">Rs. 7,000</div>
+<p class="desc">12 pairs traditional jhumka bouquet.</p>
+<a class="btn" onclick="select('Jhumka Bouquet')" href="#checkout">Order</a>
+<a class="btn2">Customize</a>
+</div>
+
+<div class="card baby">
+<img src="product4.jpg">
+<h3>Baby Girl Basket</h3>
+<div class="price">Rs. 10,000</div>
+<p class="desc">Cute baby gift basket for newborns.</p>
+<a class="btn" onclick="select('Baby Girl Basket')" href="#checkout">Order</a>
+<a class="btn2">Customize</a>
+</div>
+
+</section>
+
+<!-- CHECKOUT -->
+<section id="checkout">
+<h2>Checkout 💳</h2>
+
+<p id="selected">Selected: None</p>
+
+<form onsubmit="pay();return false;">
+<input type="text" placeholder="Name" required><br><br>
+<input type="text" placeholder="Phone" required><br><br>
+<input type="text" placeholder="Address" required><br><br>
+
+<button class="btn">Continue</button>
+</form>
+
+<div id="payment">
+<h3>Payment Details</h3>
+<p><b>JazzCash:</b> 03152950176 (Mehak Hina)</p>
+<p><b>Bank:</b> 00300108549036 (MOHSIN)</p>
+<p>Send screenshot after payment</p>
+</div>
+</section>
+
+<footer>
+© 2026 Huriaa's Creation 💖
+</footer>
+
+<script>
+
+function filter(c){
+let cards=document.getElementsByClassName("card");
+for(let i=0;i<cards.length;i++){
+cards[i].style.display="none";
+if(c=="all"||cards[i].classList.contains(c)){
+cards[i].style.display="block";
+}
+}
+}
+
+function search(){
+let input=document.getElementById("search").value.toLowerCase();
+let cards=document.getElementsByClassName("card");
+for(let i=0;i<cards.length;i++){
+cards[i].style.display=
+cards[i].innerText.toLowerCase().includes(input)?"block":"none";
+}
+}
+
+function select(name){
+document.getElementById("selected").innerText="Selected: "+name;
+}
+
+function pay(){
+document.getElementById("payment").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
