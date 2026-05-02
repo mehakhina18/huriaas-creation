@@ -8,66 +8,93 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #faf7f7;
+    font-family: 'Segoe UI', sans-serif;
+    background: #fffafa;
     color: #333;
 }
 
+/* HEADER */
 header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
     background: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 28px;
-    color: #b87b8b;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.hero {
-    text-align: center;
-    padding: 40px 20px;
-    background: #f3e9ea;
+header h1 {
+    color: #d8a7b1;
 }
 
+/* NAV */
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #555;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(#f8e1e7, #fff);
+}
+
+.hero h2 {
+    font-size: 32px;
+}
+
+.hero p {
+    color: #666;
+}
+
+/* PRODUCTS */
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    padding: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+    padding: 40px;
 }
 
 .card {
     background: white;
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
 }
 
 .card img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 .price {
-    color: #b87b8b;
+    color: #d8a7b1;
     font-weight: bold;
-    margin: 8px 0;
+    margin: 10px 0;
 }
 
 .btn {
     display: inline-block;
-    padding: 10px;
-    background: #b87b8b;
+    padding: 10px 15px;
+    background: #d8a7b1;
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 20px;
 }
 
+/* FOOTER */
 footer {
     text-align: center;
-    padding: 15px;
-    background: white;
-    color: #777;
+    padding: 20px;
+    background: #f8e1e7;
+    margin-top: 20px;
 }
 </style>
 </head>
@@ -75,34 +102,46 @@ footer {
 <body>
 
 <header>
-Huriaa's Creation 💝
+<h1>Huriaa's Creation 💝</h1>
+<nav>
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">Contact</a>
+</nav>
 </header>
 
 <section class="hero">
 <h2>Elegant Handmade Gifts</h2>
-<p>Affordable & beautiful creations made with love</p>
+<p>Make your moments special with love & creativity</p>
 </section>
 
 <section class="products">
 
 <div class="card">
-<img src="product1.jpg" alt="">
-<h3>Gift Basket</h3>
+<img src="product1.jpg">
+<h3>Luxury Gift Basket</h3>
 <div class="price">Rs. 2500</div>
-<a class="btn" href="https://wa.me/923152950176">Order on WhatsApp</a>
+<a class="btn" href="https://wa.me/923152950176?text=I want to order Luxury Gift Basket">Order Now</a>
 </div>
 
 <div class="card">
-<img src="product2.jpg" alt="">
+<img src="product2.jpg">
 <h3>Decor Set</h3>
 <div class="price">Rs. 1800</div>
-<a class="btn" href="https://wa.me/923152950176">Order on WhatsApp</a>
+<a class="btn" href="https://wa.me/923152950176?text=I want to order Decor Set">Order Now</a>
+</div>
+
+<div class="card">
+<img src="product3.jpg">
+<h3>Custom Gift</h3>
+<div class="price">Rs. 3000</div>
+<a class="btn" href="https://wa.me/923152950176?text=I want to order Custom Gift">Order Now</a>
 </div>
 
 </section>
 
 <footer>
-© 2026 Huriaa's Creation
+<p>© 2026 Huriaa's Creation | Made with 💖</p>
 </footer>
 
 </body>
