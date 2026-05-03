@@ -199,14 +199,23 @@ window.location.href =
 }
 
 function filter(category){
+
 let cards = document.getElementsByClassName("card");
 
 for(let i=0;i<cards.length;i++){
-cards[i].style.display="none";
 
-if(category=="all" || cards[i].classList.contains(category)){
-cards[i].style.display="block";
+if(category === "all"){
+cards[i].style.display = "block";
 }
+else if(cards[i].classList.contains(category)){
+cards[i].style.display = "block";
+}
+else{
+cards[i].style.display = "none";
+}
+
+}
+
 }
 }
 </script>
