@@ -10,8 +10,10 @@
 <style>
   body{
 margin:0;
-font-family:'Poppins', sans-serif;
-background:#fdf8f9;
+body{
+background:#f7f7f7;
+font-family:sans-serif;
+}
 color:#333;
 }
 
@@ -44,6 +46,21 @@ nav a{margin:0 10px;text-decoration:none;color:#555}
 text-align:center;padding:50px;
 background:linear-gradient(#f8e1e7,#fff)
 }
+  <div class="banner">
+  <h2>Premium Gifts</h2>
+</div>
+  .banner{
+height:150px;
+background:linear-gradient(135deg,#d8a7b1,#f3c6cf);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:20px;
+font-weight:bold;
+border-radius:10px;
+margin:10px;
+}
 
 /* SEARCH */
 .search{
@@ -69,46 +86,39 @@ grid-template-columns:repeat(2,1fr);
 gap:20px;padding:20px
 }
 .card{
-display:flex;
-gap:15px;
 background:white;
-padding:18px;
-border-radius:18px;
-box-shadow:0 8px 25px rgba(0,0,0,0.07);
-align-items:center;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 30px rgba(0,0,0,0.1);
+border-radius:12px;
+padding:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+margin:10px;
 }
 
 .card img{
-width:130px;
-height:130px;
-object-fit:cover;
-border-radius:12px;
+width:100%;
+border-radius:10px;
 }
 
-.price{color:#d8a7b1;font-weight:bold}
+.price{
+font-weight:bold;
+color:#e91e63;
+margin-top:5px;
+}
 
 .desc{font-size:13px;color:#666}
 
 /* BUTTONS */
 /* ORDER BUTTON (Black Outline) */
 .btn{
-display:inline-block;
-padding:10px 18px;
-background:transparent;
-color:#000;
-border:2px solid #000;
-border-radius:30px;
-font-size:14px;
-font-weight:600;
-text-decoration:none;
-transition:0.3s;
+display:block;
+width:100%;
+padding:10px;
+background:#000;
+color:#fff;
+border-radius:25px;
+text-align:center;
+margin-top:8px;
 }
+
 
 /* Hover effect (slight premium feel) */
 .btn:hover{
@@ -118,17 +128,13 @@ color:#fff;
 
 /* CUSTOMIZE BUTTON (Soft secondary) */
 .btn2{
-display:inline-block;
-padding:10px 18px;
-background:transparent;
-color:#555;
-border:2px solid #ccc;
-border-radius:30px;
-font-size:14px;
-font-weight:500;
-text-decoration:none;
-margin-left:8px;
-transition:0.3s;
+display:block;
+width:100%;
+padding:10px;
+border:1px solid #000;
+border-radius:25px;
+text-align:center;
+margin-top:5px;
 }
 
 .btn2:hover{
@@ -350,6 +356,21 @@ cards[i].style.display="flex";
 }
 </script>
 </script>
-
+<div class="bottom-nav">
+  <div>Home</div>
+  <div>Search</div>
+  <div>Cart</div>
+  <div>Profile</div>
+</div>
+  .bottom-nav{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+border-top:1px solid #ddd;
+}
 </body>
 </html>
