@@ -125,44 +125,32 @@ padding-bottom:70px;
 </style>
 
 <script>
-let whatsappNumber = "923152950176";
 
-let jazzcashInfo = "Mehak Hina (JazzCash: 03152950176)";
-let bankInfo = "Bank Account Name: Mohsin\nAccount Number: 00300108549036";
+<script>
+let whatsappNumber = "923152950176";
 
 function orderNow(product){
 
-let choice = prompt(
-"Select Payment Method:\n1 = JazzCash\n2 = Bank Transfer"
-);
-
-if(choice == "1"){
-let msg = "I want to order " + product +
-"\nPayment Method: JazzCash\n" + jazzcashInfo;
-
-window.location.href =
-"https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(msg);
-}
-
-else if(choice == "2"){
-let msg = "I want to order " + product +
-"\nPayment Method: Bank Transfer\n" + bankInfo;
+let msg =
+"I want to order: " + product + "\n\n" +
+"Bank Transfer Details:\n" +
+"Account Name: Mohsin\n" +
+"Account Number: 00300108549036\n\n" +
+"Please transfer payment and send screenshot for confirmation.";
 
 window.location.href =
 "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(msg);
-}
 
-else{
-alert("Invalid option selected!");
-}
 }
 
 function customizeNow(product){
 
-let msg = "I want to customize " + product;
+let msg =
+"I want to customize: " + product + "\n\nPlease share details.";
 
 window.location.href =
 "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(msg);
+
 }
 
 function filter(category){
@@ -176,6 +164,7 @@ cards[i].style.display="block";
 }
 }
 }
+</script>
 </script>
 
 </head>
