@@ -96,25 +96,45 @@ border-radius:12px;
 .desc{font-size:13px;color:#666}
 
 /* BUTTONS */
+/* ORDER BUTTON (Black Outline) */
 .btn{
-padding:8px 10px;
-background:#d8a7b1;
-color:#fff;
-text-decoration:none;
-border-radius:20px;
 display:inline-block;
-margin:5px
-}
-
-.btn2{
-padding:8px 10px;
-background:#6c9a8b;
-color:#fff;
+padding:10px 18px;
+background:transparent;
+color:#000;
+border:2px solid #000;
+border-radius:30px;
+font-size:14px;
+font-weight:600;
 text-decoration:none;
-border-radius:20px;
-display:inline-block
+transition:0.3s;
 }
 
+/* Hover effect (slight premium feel) */
+.btn:hover{
+background:#000;
+color:#fff;
+}
+
+/* CUSTOMIZE BUTTON (Soft secondary) */
+.btn2{
+display:inline-block;
+padding:10px 18px;
+background:transparent;
+color:#555;
+border:2px solid #ccc;
+border-radius:30px;
+font-size:14px;
+font-weight:500;
+text-decoration:none;
+margin-left:8px;
+transition:0.3s;
+}
+
+.btn2:hover{
+border-color:#000;
+color:#000;
+}
 /* CART */
 .cartBox{
 position:fixed;right:10px;top:80px;
