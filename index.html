@@ -5,12 +5,12 @@
 <title>Huriaa's Creations | Handmade Gift Shop</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#f7f7f7;
+.products{
+display:grid;
+grid-template-columns: repeat(2, 1fr);
+gap:10px;
+padding:10px;
 }
-
 .logo{
 font-family:Georgia, serif;
 font-size:22px;
@@ -71,15 +71,15 @@ padding:20px;
 background:white;
 border-radius:15px;
 padding:10px;
-margin:10px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
-
+  
 .card img{
 width:100%;
-border-radius:12px;
+height:140px;
+object-fit:cover;
 }
-
+  
 .price{
 font-weight:bold;
 color:#e91e63;
@@ -235,7 +235,12 @@ cards[i].style.display="block";
 </div>
 
 <!-- PRODUCTS -->
+  
+<div class="products">
 
+<!-- ALL CARDS HERE -->
+
+</div>
 <div class="card women men">
 <img src="product1.jpg">
 <h3>Chocolate Bouquet</h3>
