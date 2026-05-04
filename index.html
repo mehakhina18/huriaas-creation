@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Huriaa's Creations | Handmade Gift Shop</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f7f7f7;
+}
+
+.logo{
+font-family:Georgia, serif;
+font-size:22px;
+font-weight:bold;
+text-align:center;
+padding:10px;
+background:#fff;
+}
+
+.topbar{
+display:flex;
+justify-content:center;
+padding:10px;
+background:#fff;
+}
+
+.topbar input{
+width:60%;
+padding:10px;
+border-radius:25px;
+border:1px solid #ccc;
+}
+
+.categories{
+display:flex;
+overflow-x:auto;
+gap:10px;
+padding:10px;
+background:#fff;
+}
+
+.categories div{
+min-width:80px;
+height:80px;
+background:#fff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+font-weight:600;
+cursor:pointer;
+border:2px solid black;
+color:black;
+}
+
+.categories div:hover{
+background:black;
+color:white;
+}
+
+.hero{
+text-align:center;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:10px;
+margin:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+border-radius:12px;
+}
+
+.price{
+font-weight:bold;
+color:#e91e63;
+margin-top:5px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:10px;
+background:black;
+color:white;
+border-radius:25px;
+text-align:center;
+margin-top:8px;
+cursor:pointer;
+text-decoration:none;
+}
+
+.btn2{
+display:block;
+width:100%;
+padding:10px;
+border:1px solid black;
+border-radius:25px;
+text-align:center;
+margin-top:5px;
+cursor:pointer;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+border-top:1px solid #ddd;
+}
+
+body{
+padding-bottom:70px;
+}
+
+/* CHECKOUT BOX */
+#checkoutBox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+}
+
+.checkout-content{
+background:white;
+width:90%;
+max-width:400px;
+margin:120px auto;
+padding:20px;
+border-radius:15px;
+text-align:center;
+}
+</style>
+
+<script>
+let whatsappNumber = "923152950176";
+let currentProduct = "";
+
+function orderNow(product){
+currentProduct = product;
+document.getElementById("checkoutBox").style.display = "block";
+document.getElementById("info").innerHTML = "";
+}
+
+function closeBox(){
+document.getElementById("checkoutBox").style.display = "none";
+}
+
+function showBank(){
+
+document.getElementById("info").innerHTML = `
+<h3>Bank Transfer Details</h3>
+
+<p><b>Account Name:</b> Mohsin</p>
+<p><b>Account Number:</b> 00300108549036</p>
+
+<p style="color:red;font-size:13px;">
+After payment, click below and send screenshot on WhatsApp
+</p>
+
+<button onclick="paid()" class="btn">I Have Paid</button>
+`;
+}
+
+function paid(){
+
+let msg =
+"I have completed payment\n\n" +
+"Product: " + currentProduct + "\n" +
+"Payment Method: Bank Transfer\n" +
+"Account: Mohsin - 00300108549036\n\n" +
+"Please confirm my order. I will send screenshot.";
+
+window.location.href =
+"https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(msg);
+}
+
+function customizeNow(product){
+
+let msg = "I want to customize " + product;
+
+window.location.href =
+"https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(msg);
+}
+
+function filter(category){
+let cards = document.getElementsByClassName("card");
+
+for(let i=0;i<cards.length;i++){
+cards[i].style.display="none";
+
+if(category=="all" || cards[i].classList.contains(category)){
+cards[i].style.display="block";
+}
+}
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="logo">Huriaa's Creations</div>
+
+<div class="topbar">
+<input type="text" placeholder="Search gifts...">
+</div>
+
+<div class="categories">
+<div onclick="filter('all')">All</div>
+<div onclick="filter('women')">Women</div>
+<div onclick="filter('men')">Men</div>
+<div onclick="filter('babyboy')">Baby Boy</div>
+<div onclick="filter('babygirl')">Baby Girl</div>
+</div>
+
+<div class="hero">
+<h2>Unique Handmade Gift Collection</h2>
+<p>Make every moment special with our creative gifts</p>
+</div>
+
+<!-- PRODUCTS -->
+
+<div class="card women men">
+<img src="product1.jpg">
+<h3>Chocolate Bouquet</h3>
+<div class="price">Rs. 12,000</div>
+<p>Perfect gift filled with chocolates.</p>
+
+<a class="btn" onclick="orderNow('Chocolate Bouquet')">Order</a>
+<a class="btn2" onclick="customizeNow('Chocolate Bouquet')">Customize</a>
+</div>
+
+<div class="card women">
+<img src="product2.jpg">
+<h3>Makeup Bouquet</h3>
+<div class="price">Rs. 7,000</div>
+<p>Beautiful makeup gift.</p>
+
+<a class="btn" onclick="orderNow('Makeup Bouquet')">Order</a>
+<a class="btn2" onclick="customizeNow('Makeup Bouquet')">Customize</a>
+</div>
+
+<div class="bottom-nav">
+<div>Home</div>
+<div>Search</div>
+<div>Cart</div>
+<div>Profile</div>
+</div>
+
+<!-- CHECKOUT BOX -->
+<div id="checkoutBox">
+
+<div class="checkout-content">
+
+<h2>Checkout</h2>
+
+<p>Product: <b id="productName"></b></p>
+
+<button class="btn" onclick="showBank()">Show Bank Details</button>
+
+<div id="info"></div>
+
+<br>
+<button class="btn2" onclick="closeBox()">Close</button>
+
+</div>
+
+</div>
+
+<script>
+function orderNow(product){
+currentProduct = product;
+document.getElementById("checkoutBox").style.display = "block";
+document.getElementById("productName").innerText = product;
+document.getElementById("info").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
