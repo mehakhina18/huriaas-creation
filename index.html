@@ -8,8 +8,20 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f7f7f7;
+background:#f8f5ff;
 }
+ 
+ .products {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 10px;
+}
+
+@media (min-width: 600px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
 
 .logo{
@@ -87,28 +99,31 @@ color:#e91e63;
 margin-top:5px;
 }
 
-.btn{
-display:block;
-width:100%;
-padding:10px;
-background:black;
-color:white;
-border-radius:25px;
-text-align:center;
-margin-top:8px;
-cursor:pointer;
-text-decoration:none;
+.btn {
+  display:block;
+  width:100%;
+  padding:10px;
+  background:transparent;   /* ❌ black hata diya */
+  color:#6a0dad;
+  border:1px solid #c8a2ff;
+  border-radius:25px;
+  text-align:center;
+  margin-top:8px;
+  cursor:pointer;
+  text-decoration:none;
 }
-
-.btn2{
-display:block;
-width:100%;
-padding:10px;
-border:1px solid black;
-border-radius:25px;
-text-align:center;
-margin-top:5px;
-cursor:pointer;
+ 
+.btn2 {
+  display:block;
+  width:100%;
+  padding:10px;
+  border:1px solid #c8a2ff;
+  border-radius:25px;
+  text-align:center;
+  margin-top:5px;
+  cursor:pointer;
+  background:#f2ecff;
+  color:#6a0dad;
 }
 
 .bottom-nav{
@@ -162,10 +177,16 @@ function closeBox(){
 document.getElementById("checkoutBox").style.display = "none";
 }
 
+
+
+<button onclick="paid()" class="btn2">I Have Paid</button>
+`;
+}
+
 function showBank(){
 
 document.getElementById("info").innerHTML = `
-<h3>Bank Transfer Details</h3>
+<h3 style="color:#6a0dad;">Bank Transfer Details</h3>
 
 <p><b>Account Name:</b> Mohsin</p>
 <p><b>Account Number:</b> 00300108549036</p>
@@ -174,7 +195,7 @@ document.getElementById("info").innerHTML = `
 After payment, click below and send screenshot on WhatsApp
 </p>
 
-<button onclick="paid()" class="btn">I Have Paid</button>
+<button onclick="paid()" class="btn2">I Have Paid</button>
 `;
 }
 
