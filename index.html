@@ -166,16 +166,25 @@
 
     // Products Data
     const products = [
-      { id: 1, name: "Chocolate Bouquet", price: 12000, desc: "Perfect gift filled with chocolates.", img: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=400" },
-      { id: 2, name: "Makeup Bouquet", price: 7500, desc: "A perfect blend of beauty and love.", img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400" },
-      { id: 3, name: "Teddy Gift Hamper", price: 5000, desc: "Cute teddy with amazing goodies.", img: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=400" },
-      { id: 4, name: "Explosion Box", price: 3000, desc: "Memories in a box that explodes with love.", img: "https://images.unsplash.com/photo-1513201099705-a9746e1e201f?w=400" },
-      { id: 5, name: "Photo Frame Collage", price: 2500, desc: "Beautiful memories in a creative frame.", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=400" },
-      { id: 6, name: "Custom Name Lamp", price: 2800, desc: "Personalized lamp with your name.", img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400" },
-      { id: 7, name: "Scented Candle Set", price: 2200, desc: "Relax with our premium scented candles.", img: "https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?w=400" },
-      { id: 8, name: "Gift Box For Him", price: 4500, desc: "Special gift box for the special man.", img: "https://images.unsplash.com/photo-1544441893-675973e31985?w=400" }
-    ];
+      
+<div class="card women men">
+<img src="product1.jpg">
+<h3>Chocolate Bouquet</h3>
+<div class="price">Rs. 12,000</div>
+<p>Perfect gift filled with delicious chocolates.</p>
+<div class="btn" onclick="orderNow('Chocolate Bouquet')">Order</div>
+<div class="btn2" onclick="customizeNow('Chocolate Bouquet')">Customize</div>
+</div>
 
+<div class="card women">
+<img src="product2.jpg">
+<h3>Makeup Bouquet</h3>
+<div class="price">Rs. 7,000</div>
+<p>Beautiful makeup gift bouquet.</p>
+<div class="btn" onclick="orderNow('Makeup Bouquet')">Order</div>
+<div class="btn2" onclick="customizeNow('Makeup Bouquet')">Customize</div>
+</div>
+    
     let currentOrder = {};
 
     // Products ko page pe show karo
