@@ -1,136 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huriaa's Creations - Handmade with Love</title>
-
-<style>
-:root {
-  --purple:#7B2CBF;
-  --light-purple:#F3E8FF;
-  --dark:#1A1A1A;
-  --grey:#6B7280;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI, sans-serif;
-}
-
-body{background:#fff;color:var(--dark);}
-
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  padding:15px 5%;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
-
-.logo h1{color:var(--purple);font-size:24px;}
-.logo p{font-size:12px;color:var(--grey);}
-
-.categories{
-  background:var(--light-purple);
-  padding:15px 5%;
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.categories button{
-  padding:8px 18px;
-  border:none;
-  border-radius:20px;
-  background:#fff;
-  cursor:pointer;
-}
-
-.categories button.active{
-  background:var(--purple);
-  color:#fff;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:30px 5%;
-}
-
-.card{
-  border:1px solid #eee;
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
-}
-
-.card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-}
-
-.card h3{margin:10px;}
-.price{margin:10px;color:var(--purple);font-weight:bold;}
-.card p{margin:10px;color:var(--grey);}
-
-.btn{
-  width:90%;
-  margin:10px 5%;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-  background:var(--purple);
-  color:#fff;
-  cursor:pointer;
-}
-</style>
-</head>
-
-<body>
-
-<header class="navbar">
-  <div class="logo">
-    <h1>Huriaa's Creations</h1>
-    <p>Handmade with Love ♥</p>
-  </div>
-</header>
-
-<nav class="categories">
-  <button class="active" onclick="filterProducts('All', this)">All</button>
-<button onclick="filterProducts('Women', this)">Women</button>
-<button onclick="filterProducts('Men', this)">Men</button>
-<button onclick="filterProducts('Baby Boy', this)">Baby Boy</button>
-<button onclick="filterProducts('Baby Girl', this)">Baby Girl</button>
-</nav>
-
-<section class="products" id="productList"></section>
-  <div id="bankModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);">
-  <div style="background:#fff;max-width:400px;margin:10% auto;padding:20px;border-radius:12px;position:relative;">
-    
-    <h2>Bank Details</h2>
-    <p id="orderSummary"></p>
-
-    <div style="background:#F3E8FF;padding:10px;border-radius:8px;margin:10px 0;">
-      <p><b>Bank:</b> UBL Bank</p>
-      <p><b>Account Title:</b> Mohsin</p>
-      <p><b>Account No:</b> 00300108549036</p>
-    </div>
-
-    <button style="background:#25D366;color:white;width:100%;padding:10px;border:none;border-radius:8px"
-      onclick="sendToWhatsApp()">
-      I Have Paid - Send Screenshot
-    </button>
-
-    <button onclick="closeModal()" style="margin-top:10px;width:100%">Close</button>
-  </div>
-</div>
-
 <script>
 const products = [
   { id:"p1", name:"Chocolate Bouquet", price:12000, desc:"Perfect Gift", img:"product1.jpg", category:["Women"] },
@@ -138,7 +5,11 @@ const products = [
   { id:"p3", name:"Watch Gift Box", price:10000, desc:"Luxury Gift", img:"product3.jpg", category:["Men"] }
 ];
 
-// safe render function
+let currentOrder = {};
+const WHATSAPP_NUMBER = "923152950176";
+const WEBSITE_URL = window.location.href.split('#')[0];
+
+// ---------------- PRODUCTS DISPLAY ----------------
 function displayProducts(cat="All"){
   const box = document.getElementById("productList");
   box.innerHTML = "";
@@ -147,11 +18,6 @@ function displayProducts(cat="All"){
     ? products
     : products.filter(p => p.category.includes(cat));
 
-  if(filtered.length === 0){
-    box.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:gray;'>No products found</p>";
-    return;
-  }
-
   filtered.forEach(p=>{
     box.innerHTML += `
       <div class="card">
@@ -159,33 +25,28 @@ function displayProducts(cat="All"){
         <h3>${p.name}</h3>
         <div class="price">Rs. ${p.price.toLocaleString()}</div>
         <p>${p.desc}</p>
-       <button class="btn" onclick="orderNow('${p.name}', ${p.price}, '${p.id}')">Order Now</button>
-<button class="btn" style="background:white;color:var(--purple);border:1px solid var(--purple)" onclick="customizeNow('${p.name}', '${p.id}')">Customize</button>
+
+        <button class="btn" onclick="orderNow('${p.name}', ${p.price}, '${p.id}')">Order Now</button>
+
+        <button class="btn" style="background:white;color:var(--purple);border:1px solid var(--purple)" 
+        onclick="customizeNow('${p.name}', '${p.id}')">
+        Customize
+        </button>
       </div>
     `;
   });
 }
 
-// category filter fix
+// ---------------- CATEGORY FILTER ----------------
 function filterProducts(cat, el){
-  document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".categories button")
+    .forEach(b=>b.classList.remove("active"));
+
   el.classList.add("active");
   displayProducts(cat);
 }
-}
 
-function orderNow(name, price){
-  alert("Order: " + name + " | Rs " + price);
-}
-
-// IMPORTANT FIX (DOM safe load)
-window.addEventListener("DOMContentLoaded", function(){
-  displayProducts("All");
-});
-  let currentOrder = {};
-const WHATSAPP_NUMBER = "923152950176";
-const WEBSITE_URL = window.location.href.split('#')[0];
-
+// ---------------- ORDER SYSTEM (BANK + WHATSAPP) ----------------
 function orderNow(name, price, id){
   currentOrder = {
     name,
@@ -199,24 +60,29 @@ function orderNow(name, price, id){
   document.getElementById("bankModal").style.display = "block";
 }
 
+// ---------------- CUSTOMIZE (WHATSAPP DIRECT) ----------------
 function customizeNow(name, id){
   let msg = `Hello! I want to customize *${name}*%0AProduct Link: ${WEBSITE_URL}#${id}`;
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
+// ---------------- PAYMENT CONFIRM ----------------
 function sendToWhatsApp(){
   let msg = `*New Order Paid*%0AProduct: ${currentOrder.name}%0AAmount: Rs ${currentOrder.price}%0ALink: ${currentOrder.link}%0AI have sent payment screenshot.`;
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 
   closeModal();
 }
 
+// ---------------- MODAL CLOSE ----------------
 function closeModal(){
   document.getElementById("bankModal").style.display = "none";
 }
-</script>
 
-</body>
-</html>
+// ---------------- INIT ----------------
+window.addEventListener("DOMContentLoaded", function(){
+  displayProducts("All");
+});
+</script>
