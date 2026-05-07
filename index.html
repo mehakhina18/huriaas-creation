@@ -110,6 +110,26 @@ body{background:#fff;color:var(--dark);}
 </nav>
 
 <section class="products" id="productList"></section>
+  <div id="bankModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);">
+  <div style="background:#fff;max-width:400px;margin:10% auto;padding:20px;border-radius:12px;position:relative;">
+    
+    <h2>Bank Details</h2>
+    <p id="orderSummary"></p>
+
+    <div style="background:#F3E8FF;padding:10px;border-radius:8px;margin:10px 0;">
+      <p><b>Bank:</b> UBL Bank</p>
+      <p><b>Account Title:</b> Mohsin</p>
+      <p><b>Account No:</b> 00300108549036</p>
+    </div>
+
+    <button style="background:#25D366;color:white;width:100%;padding:10px;border:none;border-radius:8px"
+      onclick="sendToWhatsApp()">
+      I Have Paid - Send Screenshot
+    </button>
+
+    <button onclick="closeModal()" style="margin-top:10px;width:100%">Close</button>
+  </div>
+</div>
 
 <script>
 const products = [
@@ -139,7 +159,8 @@ function displayProducts(cat="All"){
         <h3>${p.name}</h3>
         <div class="price">Rs. ${p.price.toLocaleString()}</div>
         <p>${p.desc}</p>
-        <button class="btn" onclick="orderNow('${p.name}', ${p.price})">Order Now</button>
+       <button class="btn" onclick="orderNow('${p.name}', ${p.price}, '${p.id}')">Order Now</button>
+<button class="btn" style="background:white;color:var(--purple);border:1px solid var(--purple)" onclick="customizeNow('${p.name}', '${p.id}')">Customize</button>
       </div>
     `;
   });
@@ -161,6 +182,40 @@ function orderNow(name, price){
 window.addEventListener("DOMContentLoaded", function(){
   displayProducts("All");
 });
+  let currentOrder = {};
+const WHATSAPP_NUMBER = "923152950176";
+const WEBSITE_URL = window.location.href.split('#')[0];
+
+function orderNow(name, price, id){
+  currentOrder = {
+    name,
+    price,
+    link: WEBSITE_URL + "#" + id
+  };
+
+  document.getElementById("orderSummary").innerHTML =
+    `<b>Product:</b> ${name}<br><b>Price:</b> Rs ${price}`;
+
+  document.getElementById("bankModal").style.display = "block";
+}
+
+function customizeNow(name, id){
+  let msg = `Hello! I want to customize *${name}*%0AProduct Link: ${WEBSITE_URL}#${id}`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+}
+
+function sendToWhatsApp(){
+  let msg = `*New Order Paid*%0AProduct: ${currentOrder.name}%0AAmount: Rs ${currentOrder.price}%0ALink: ${currentOrder.link}%0AI have sent payment screenshot.`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+
+  closeModal();
+}
+
+function closeModal(){
+  document.getElementById("bankModal").style.display = "none";
+}
 </script>
 
 </body>
