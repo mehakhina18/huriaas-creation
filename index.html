@@ -12,12 +12,7 @@
   --grey:#6B7280;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Segoe UI;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI;}
 
 body{background:#fff;}
 
@@ -85,9 +80,7 @@ body{background:#fff;}
 }
 
 .primary{background:var(--purple);color:#fff;}
-.outline{background:#fff;border:1px solid var(--purple);color:var(--purple);}
 
-/* MODAL */
 .modal{
   display:none;
   position:fixed;
@@ -120,7 +113,6 @@ body{background:#fff;}
   <button class="active" onclick="filterProducts('All',this)">All</button>
   <button onclick="filterProducts('Women',this)">Women</button>
   <button onclick="filterProducts('Men',this)">Men</button>
-  <button onclick="filterProducts('Baby Boy',this)">Baby Boy</button>
   <button onclick="filterProducts('Baby Girl',this)">Baby Girl</button>
 </nav>
 
@@ -138,38 +130,38 @@ body{background:#fff;}
       <p><b>Acc No:</b> 00300108549036</p>
     </div>
 
-    <button class="btn primary" onclick="sendToWhatsApp()">
-      I Have Paid - Send Screenshot
-    </button>
-
-    <button class="btn outline" onclick="closeModal()">Close</button>
+    <button class="btn primary" onclick="sendToWhatsApp()">I Have Paid - Send Screenshot</button>
+    <button class="btn" onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <script>
 
 const products = [
-  {id:"p1",name:"Chocolate Bouquet",price:12000,desc:"Sweetness Wrapped In Love",img:"product1.jpg",category:["Women","Men"]},
-  {id:"p2",name:"Makeup Bouquet",price:8000,desc:"Beauty Gift",img:"product2.jpg",category:["Women"]},
-  {id:"p3",name:"Jhumka Bouquet",price:7000,desc:"Traditional Gift",img:"product3.jpg",category:["Men"]},
-  {id:"p4",name:"Premium Gift Box",price:12000,desc:"Luxury Gift",img:"product4.jpg",category:["Women","Men"]},
-  {id:"p5",name:"Baby Girl Basket",price:8000,desc:"Cute Baby Gift",img:"product5.jpg",category:["Baby Girl"]},
-  {id:"p6",name:"Mother's Day Basket",price:7000,desc:"Special Gift",img:"product6.jpg",category:["Women"]},
-  {id:"p7",name:"Hijabi Bouquet",price:7000,desc:"Elegant Gift",img:"product7.jpg",category:["Women"]},
-  {id:"p8",name:"Flower Bouquet",price:1500,desc:"Handmade Flowers",img:"product8.jpg",category:["Women","Men"]},
-  {id:"p9",name:"Umrah Package",price:20000,desc:"Spiritual Gift",img:"product9.jpg",category:["Women","Men"]},
-  {id:"p10",name:"Baby Box",price:4000,desc:"Baby Gift Box",img:"product10.jpg",category:["Baby Girl"]}
+  {id:"p1",name:"Chocolate Bouquet",price:12000,desc:"Sweetness Wrapped In Love",img:"product1.jpg",category:"Women"},
+  {id:"p2",name:"Makeup Bouquet",price:8000,desc:"Beauty Gift Surprise",img:"product2.jpg",category:"Women"},
+  {id:"p3",name:"12 Pair Jhumka Bouquet",price:7000,desc:"Traditional Elegant Gift",img:"product3.jpg",category:"Men"},
+  {id:"p4",name:"Premium Gift Box",price:12000,desc:"Luxury Gift Box",img:"product4.jpg",category:"Women"},
+  {id:"p5",name:"Baby Girl Basket",price:8000,desc:"Cute Baby Girl Gift",img:"product5.jpg",category:"Baby Girl"},
+  {id:"p6",name:"Baby Girl Basket Small",price:5500,desc:"Sweet Baby Gift",img:"product6.jpg",category:"Baby Girl"},
+  {id:"p7",name:"Mother's Day Basket",price:7000,desc:"Special Love Gift",img:"product7.jpg",category:"Women"},
+  {id:"p8",name:"Hijabi Bouquet",price:7000,desc:"Elegant Style Gift",img:"product8.jpg",category:"Women"},
+  {id:"p9",name:"Handmade Flowers Bouquet",price:1500,desc:"Forever Flowers",img:"product9.jpg",category:"Women"},
+  {id:"p10",name:"Umrah Package Gift",price:20000,desc:"Spiritual Gift",img:"product10.jpg",category:"Women"},
+  {id:"p11",name:"Baby Girl Basket Deluxe",price:10000,desc:"Premium Baby Gift",img:"product11.jpg",category:"Baby Girl"},
+  {id:"p12",name:"Baby Box",price:4000,desc:"Cute Baby Surprise",img:"product12.jpg",category:"Baby Girl"}
 ];
 
 let currentOrder = {};
 const WHATSAPP = "923152950176";
 const SITE = window.location.href.split('#')[0];
 
-function displayProducts(cat="All"){
+// DISPLAY
+function displayProducts(cat){
   const box = document.getElementById("productList");
   box.innerHTML = "";
 
-  let list = (cat === "All") ? products : products.filter(p => p.category.includes(cat));
+  let list = (cat==="All") ? products : products.filter(p=>p.category===cat);
 
   list.forEach(p=>{
     box.innerHTML += `
@@ -179,50 +171,40 @@ function displayProducts(cat="All"){
         <div class="price">Rs ${p.price}</div>
         <p>${p.desc}</p>
 
-        <button class="btn primary" onclick="orderNow('${p.name}',${p.price},'${p.id}')">Order Now</button>
-        <button class="btn outline" onclick="customizeNow('${p.name}','${p.id}')">Customize</button>
+        <button class="btn primary" onclick="orderNow('${p.name}',${p.price},'${p.id}')">Order</button>
       </div>
     `;
   });
 }
 
-function filterProducts(cat, el){
-  document.querySelectorAll(".categories button").forEach(b=>{
-    b.classList.remove("active");
-  });
-
-  if(el) el.classList.add("active");
-
+// FILTER
+function filterProducts(cat,el){
+  document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+  el.classList.add("active");
   displayProducts(cat);
 }
 
+// ORDER
 function orderNow(name,price,id){
-  currentOrder = {name,price,link:SITE+"#"+id};
-
-  document.getElementById("orderSummary").innerHTML =
-    `<b>Product:</b> ${name}<br><b>Price:</b> Rs ${price}`;
-
-  document.getElementById("bankModal").style.display = "block";
+  currentOrder={name,price};
+  document.getElementById("orderSummary").innerHTML=
+  `Product: ${name}<br>Price: Rs ${price}`;
+  document.getElementById("bankModal").style.display="block";
 }
 
-function customizeNow(name,id){
-  let msg = `Hello! I want to customize ${name}%0A${SITE}#${id}`;
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`);
-}
-
+// WHATSAPP
 function sendToWhatsApp(){
-  let msg = `*Paid Order*%0AProduct: ${currentOrder.name}%0AAmount: ${currentOrder.price}%0ALink: ${currentOrder.link}`;
+  let msg=`Paid Order%0AProduct:${currentOrder.name}%0AAmount:${currentOrder.price}`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`);
-  closeModal();
 }
 
+// CLOSE
 function closeModal(){
-  document.getElementById("bankModal").style.display = "none";
+  document.getElementById("bankModal").style.display="none";
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-  displayProducts("All");
-});
+// INIT
+window.onload = ()=>displayProducts("All");
 
 </script>
 
