@@ -100,16 +100,18 @@
 	
   <script>
     const WHATSAPP_NUMBER = "923152950176";
-    const BANK_TITLE = "Mohsin";
-    const BANK_ACCOUNT = "00300108549036";
-    const BANK_NAME = "UBL Bank"; 
+const BANK_TITLE = "Mohsin";
+const BANK_ACCOUNT = "00300108549036";
+const BANK_NAME = "MEEZAN Bank";
     const WEBSITE_URL = window.location.href.split('#')[0];
 
-	  <!-- PRODUCTS -->
+	
 		  
     // PRODUCTS ARRAY - 
     const products = [
-      { id: "product1", name: "Chocolate Bouquet", price: 12000, desc: "Perfect Gift Filled With Delicious Chocolates.", img: "product1.jpg", category: ["Men", "Women"] },
+    const products = [
+  { id: "product1", name: "Chocolate Bouquet", price: 12000, desc: "Perfect Gift…", img: "product1.jpg" }
+];
       { id: "product2", name: "Makeup Bouquet", price: 7000, desc: "Beautiful Makeup Gift Bouquet.", img: "product2.jpg", category: ["Women"] },
       { id: "product3", name: "Watch Gift Box", price: 10000, desc: "Gift Him Something Truly Special.", img: "product3.jpg", category: ["Men"] },
       { id: "product4", name: "Baby Boy Basket", price: 3000, desc: "Cute gift for baby boy.", img: "product4.jpg", category: ["Baby Boy"] },
@@ -125,7 +127,7 @@
 
     // PRODUCTS SHOW KARNE KA FUNCTION
     function displayProducts(filterCat) {
-      const productList = document.getElementById('productList');
+      const productList = document.getElementById("productList");
       productList.innerHTML = '';
       
       const filtered = filterCat === 'All'? products : products.filter(p => p.category.includes(filterCat));
