@@ -137,6 +137,7 @@
             <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x220/7B2CBF/FFFFFF?text=Image+Missing'">
             <h3>${p.name}</h3>
             <div class="price">Rs. ${p.price.toLocaleString()}</div>
+			displayProducts ('All')
             <p>${p.desc}</p>
             <div class="btn" onclick="orderNow('${p.name}', ${p.price}, '${p.id}')">Order Now</div>
             <div class="btn2" onclick="customizeNow('${p.name}', '${p.id}')">Customize</div>
