@@ -128,7 +128,7 @@
       const filtered = filterCat === 'All'? products : products.filter(p => p.category.includes(filterCat));
       
       if(filtered.length === 0){
-        productList.innerHTML = <p style="text-align:center; color:var(--grey); grid-column: 1/-1;">No products found in this category.</p>;
+     productList.innerHTML = `<p style="text-align:center; color:var(--grey); grid-column: 1/-1;">No products found in this category.</p>`;
         return;
       }
 
