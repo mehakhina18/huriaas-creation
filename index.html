@@ -1,196 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Huriaa's Creations - Handmade with Love</title>
-  <style>
-    :root { --purple: #7B2CBF; --light-purple: #F3E8FF; --dark: #1A1A1A; --grey: #6B7280; }
-	○  { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background: #fff; color: var(--dark); }
-.navbar { display: flex; align-items: center; justify-content: space-between; padding: 15px 5%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huriaa's Creations - Handmade with Love</title>
+
+<style>
+:root {
+  --purple: #7B2CBF;
+  --light-purple: #F3E8FF;
+  --dark: #1A1A1A;
+  --grey: #6B7280;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body { background: #fff; color: var(--dark); }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 5%;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
 .logo h1 { color: var(--purple); font-size: 24px; }
 .logo p { font-size: 12px; color: var(--grey); }
-.categories { background: var(--light-purple); padding: 15px 5%; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.categories button { padding: 8px 20px; border: none; border-radius: 20px; background: white; cursor: pointer; font-weight: 500; }
-.categories button.active { background: var(--purple); color: white; }
-.hero { margin: 30px 5%; background: var(--light-purple); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: space-between; }
-.hero-text h2 { font-size: 40px; line-height: 1.2; }
-.hero-text h2 span { color: var(--purple); }
-.hero-text p { margin: 15px 0; color: var(--grey); }
-.shop-btn { background: var(--purple); color: white; padding: 12px 25px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-.hero-img img { max-width: 300px; border-radius: 12px; }
-.section-title { text-align: center; margin: 50px 0 30px; font-size: 28px; }
-.products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; padding: 0 5% 50px; }
-.card { border: 1px solid #eee; border-radius: 12px; overflow: hidden; position: relative; background: white; }
-.card img { width: 100%; height: 220px; object-fit: cover; background: #f5f5f5; }
-.wishlist { position: absolute; top: 10px; right: 10px; background: white; border-radius: 50%; width: 35px; height: 35px; display: grid; place-items: center; cursor: pointer; }
-.card h3 { font-size: 18px; margin: 15px 15px 5px; }
-.price { color: var(--purple); font-weight: bold; font-size: 18px; margin: 0 15px 8px; }
-.card p { color: var(--grey); font-size: 14px; margin: 0 15px 15px; min-height: 40px; }
-.btn,.btn2 { width: calc(100% - 30px); margin: 0 15px 10px; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500; text-align: center; }
+
+.categories {
+  background: var(--light-purple);
+  padding: 15px 5%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.categories button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+}
+
+.categories button.active {
+  background: var(--purple);
+  color: white;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 40px 5%;
+}
+
+.card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card h3 { margin: 10px; }
+.price { color: var(--purple); margin: 10px; font-weight: bold; }
+.card p { margin: 10px; color: var(--grey); }
+
+.btn, .btn2 {
+  width: 90%;
+  margin: 5px 5%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
 .btn { background: var(--purple); color: white; }
-.btn2 { background: white; border: 1px solid var(--purple); color: var(--purple); margin-bottom: 15px; }
-    footer { background: var(--light-purple); padding: 40px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-    footer h4 { margin-bottom: 15px; }
-    footer p, footer a { color: var(--grey); text-decoration: none; font-size: 14px; line-height: 1.8; }
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; }
-.modal-content { background: white; max-width: 450px; margin: 5% auto; padding: 30px; border-radius: 12px; position: relative; }
-.close { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; }
-.bank-details { background: var(--light-purple); padding: 15px; border-radius: 8px; margin: 15px 0; }
-.bank-details p { margin: 8px 0; }
-.instructions { font-size: 14px; color: var(--grey); line-height: 1.6; margin: 15px 0; }
-.whatsapp-btn { background: #25D366; color: white; width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 15px; font-weight: 600; }
-    @media (max-width: 768px) {.hero { flex-direction: column; text-align: center; }.hero-img { margin-top: 20px; } }
-  </style>
+.btn2 { border: 1px solid var(--purple); color: var(--purple); }
+
+</style>
 </head>
+
 <body>
-  <header class="navbar">
-    <div class="logo"><div><h1>Huriaa's Creations</h1><p>Handmade with Love ♥</p></div></div>
-  </header>
 
-  <nav class="categories">
-    <button class="active" onclick="filterProducts('All')">All</button>
-    <button onclick="filterProducts('Women')">Women</button>
-    <button onclick="filterProducts('Men')">Men</button>
-    <button onclick="filterProducts('Baby Boy')">Baby Boy</button>
-    <button onclick="filterProducts('Baby Girl')">Baby Girl</button>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-text">
-      <h2>Unique Handmade<br><span>Gift Collection</span></h2>
-      <p>Make every moment special with our creative gifts ♥</p>
-      <button class="shop-btn" onclick="document.getElementById('productList').scrollIntoView({behavior: 'smooth'})">Shop Now →</button>
-    </div>
-    <div class="hero-img"><img src="https://images.unsplash.com/photo-1549465220-1a8b8220686d?w=400" alt="Gift Box"></div>
-  </section>
-
-  <h2 class="section-title">🎁 Our Products</h2>
-  <section class="products" id="productList"></section>
-
-  <footer>
-    <div><h4>About Us</h4><p>Huriaa's Creations is all about spreading happiness through our handmade gifts. Each gift is made with love ♥</p></div>
-    <div><h4>Quick Links</h4><p><a href="#">Home</a><br><a href="#">Shop</a><br><a href="#">About Us</a><br><a href="#">Contact Us</a></p></div>
-    <div><h4>Contact Us</h4><p>WhatsApp: 0315-2950176<br>Instagram: @huriaas.creations<br>Email: huriaascreations@gmail.com</p></div>
-  </footer>
-
-  <div id="bankModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2>Bank Transfer Details</h2>
-      <p id="orderSummary" style="margin: 15px 0; font-size: 16px;"></p>
-      <div class="bank-details">
-        <p><strong>Bank Name:</strong> UBL Bank</p>
-        <p><strong>Account Title:</strong> Mohsin</p>
-        <p><strong>Account Number:</strong> 00300108549036</p>
-      </div>
-      <div class="instructions">
-        <strong>How to Order:</strong><br>
-		1.  Transfer the total amount to the above bank account<br>
-		2.  Take a screenshot of your payment confirmation<br>
-		3.  Click "I Have Paid" button below to send screenshot on WhatsApp
-      </div>
-      <button class="whatsapp-btn" onclick="sendToWhatsApp()">I Have Paid - Send Screenshot</button>
-    </div>
+<header class="navbar">
+  <div class="logo">
+    <h1>Huriaa's Creations</h1>
+    <p>Handmade with Love ♥</p>
   </div>
-	
-<section class="products" id="productList">
-</section>
-	
-  <script>
-    const WHATSAPP_NUMBER = "923152950176";
+</header>
+
+<nav class="categories">
+  <button class="active" onclick="filterProducts('All')">All</button>
+  <button onclick="filterProducts('Women')">Women</button>
+  <button onclick="filterProducts('Men')">Men</button>
+  <button onclick="filterProducts('Baby Boy')">Baby Boy</button>
+  <button onclick="filterProducts('Baby Girl')">Baby Girl</button>
+</nav>
+
+<section class="products" id="productList"></section>
+
+<script>
+const WHATSAPP_NUMBER = "923152950176";
 const BANK_TITLE = "Mohsin";
 const BANK_ACCOUNT = "00300108549036";
-const BANK_NAME = "MEEZAN Bank";
-    const WEBSITE_URL = window.location.href.split('#')[0];
+const BANK_NAME = "UBL Bank";
+const WEBSITE_URL = window.location.href.split('#')[0];
 
-	
-		  
-    // PRODUCTS ARRAY - 
-    const products = [
-    const products = [
-  { id: "product1", name: "Chocolate Bouquet", price: 12000, desc: "Perfect Gift…", img: "product1.jpg" }
+const products = [
+  { id:"product1", name:"Chocolate Bouquet", price:12000, desc:"Perfect Gift", img:"product1.jpg", category:["Women"] },
+  { id:"product2", name:"Makeup Bouquet", price:7000, desc:"Beautiful Makeup Gift", img:"product2.jpg", category:["Women"] },
+  { id:"product3", name:"Watch Gift Box", price:10000, desc:"Special Gift", img:"product3.jpg", category:["Men"] }
 ];
-      { id: "product2", name: "Makeup Bouquet", price: 7000, desc: "Beautiful Makeup Gift Bouquet.", img: "product2.jpg", category: ["Women"] },
-      { id: "product3", name: "Watch Gift Box", price: 10000, desc: "Gift Him Something Truly Special.", img: "product3.jpg", category: ["Men"] },
-      { id: "product4", name: "Baby Boy Basket", price: 3000, desc: "Cute gift for baby boy.", img: "product4.jpg", category: ["Baby Boy"] },
-      { id: "product5", name: "Baby Girl Set", price: 2500, desc: "Adorable gift for baby girl.", img: "product5.jpg", category: ["Baby Girl"] },
-      { id: "product6", name: "Perfume Hamper", price: 4000, desc: "Luxury perfume set.", img: "product6.jpg", category: ["Men", "Women"] },
-      { id: "product7", name: "Teddy Bouquet", price: 3500, desc: "Soft teddy with chocolates.", img: "product7.jpg", category: ["Women", "Baby Girl"] },
-      { id: "product8", name: "Wallet & Belt", price: 6000, desc: "Premium gift set for men.", img: "product8.jpg", category: ["Men"] },
-      { id: "product9", name: "Kids Toy Box", price: 4500, desc: "Fun toys for kids.", img: "product9.jpg", category: ["Baby Boy", "Baby Girl"] }
-    ];
 
-    let currentOrder = {};
-    let currentCategory = 'All';
+let currentOrder = {};
 
-    // PRODUCTS SHOW KARNE KA FUNCTION
-    function displayProducts(filterCat) {
-      const productList = document.getElementById("productList");
-      productList.innerHTML = '';
-      
-      const filtered = filterCat === 'All'? products : products.filter(p => p.category.includes(filterCat));
-      
-      if(filtered.length === 0){
-     productList.innerHTML = `<p style="text-align:center; color:var(--grey); grid-column: 1/-1;">No products found in this category.</p>`;
-        return;
-      }
+function displayProducts(cat="All") {
+  const list = document.getElementById("productList");
+  list.innerHTML = "";
 
-      filtered.forEach(p => {
-        productList.innerHTML += `
-          <div class="card" id="${p.id}">
-            <div class="wishlist">♡</div>
-            <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x220/7B2CBF/FFFFFF?text=Image+Missing'">
-            <h3>${p.name}</h3>
-            <div class="price">Rs. ${p.price.toLocaleString()}</div>
-	
-            <p>${p.desc}</p>
-            <div class="btn" onclick="orderNow('${p.name}', ${p.price}, '${p.id}')">Order Now</div>
-            <div class="btn2" onclick="customizeNow('${p.name}', '${p.id}')">Customize</div>
-          </div>
-        `;
-      });
-    }
+  const filtered = cat === "All" ? products : products.filter(p => p.category.includes(cat));
 
-    // CATEGORY FILTER
-    function filterProducts(cat) {
-      currentCategory = cat;
-      // Active button ka color change karo
-      document.querySelectorAll('.categories button').forEach(btn => {
-        btn.classList.remove('active');
-        if(btn.innerText === cat) btn.classList.add('active');
-      });
-      displayProducts(cat);
-    }
+  filtered.forEach(p => {
+    list.innerHTML += `
+      <div class="card">
+        <img src="${p.img}">
+        <h3>${p.name}</h3>
+        <div class="price">Rs. ${p.price}</div>
+        <p>${p.desc}</p>
+        <button class="btn" onclick="orderNow('${p.name}', ${p.price})">Order Now</button>
+      </div>
+    `;
+  });
+}
 
-    function orderNow(productName, price, productId) {
-      currentOrder = { name: productName, price: price, id: productId, link: WEBSITE_URL + '#' + productId };
-      document.getElementById('orderSummary').innerHTML = <strong>Order:</strong> ${productName}<br><strong>Total Amount:</strong> Rs. ${price.toLocaleString()};
-      document.getElementById('bankModal').style.display = 'block';
-    }
+function filterProducts(cat){
+  displayProducts(cat);
+}
 
-    function customizeNow(productName, productId) {
-      let productLink = WEBSITE_URL + '#' + productId;
-      let message = Hello! I want to customize *${productName}*.%0A%0AProduct Link: ${productLink}%0A%0APlease share the customization details and pricing.;
-      window.open(https://wa.me/${WHATSAPP_NUMBER}?text=${message}, '_blank');
-    }
+function orderNow(name, price){
+  currentOrder = {name, price};
+  alert("Order placed: " + name + " Rs " + price);
+}
 
-    function closeModal() { 
-      document.getElementById('bankModal').style.display = 'none'; 
-    }
+displayProducts();
+</script>
 
-    function sendToWhatsApp() {
-      let message = *New Order - Payment Done* ✅%0A%0A*Product:* ${currentOrder.name}%0A*Amount Paid:* Rs. ${currentOrder.price.toLocaleString()}%0A*Product Link:* ${currentOrder.link}%0A%0A*Bank Details:*%0ABank: ${BANK_NAME}%0AAccount: ${BANK_TITLE}%0AAcc No: ${BANK_ACCOUNT}%0A%0AI have transferred the payment. Attaching payment screenshot now.;
-      window.open(https://wa.me/${WHATSAPP_NUMBER}?text=${message}, '_blank');
-      closeModal();
-    }
-
-    window.onclick = function(event) { 
-      if (event.target == document.getElementById('bankModal')) { closeModal(); } 
-		// PAGE LOAD PE SARE PRODUCTS DIKHAO
-		 displayProducts('All');
-    }
-  </script>
 </body>
 </html>
