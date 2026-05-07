@@ -188,9 +188,15 @@ function displayProducts(cat="All"){
   });
 }
 
-function filterProducts(cat,el){
-  document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
-  el.classList.add("active");
+function filterProducts(cat, el){
+  document.querySelectorAll(".categories button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  if(el){
+    el.classList.add("active");
+  }
+
   displayProducts(cat);
 }
 
@@ -216,7 +222,9 @@ function closeModal(){
   document.getElementById("bankModal").style.display="none";
 }
 
-window.onload=()=>displayProducts("All");
+document.addEventListener("DOMContentLoaded", function(){
+  displayProducts("All");
+});
 
 </script>
 
