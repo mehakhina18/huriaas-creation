@@ -35,6 +35,7 @@ border:none;
 border-radius:20px;
 cursor:pointer;
 background:white;
+font-size:15px;
 }
 
 .categories button.active{
@@ -85,6 +86,7 @@ padding:10px;
 border:none;
 border-radius:8px;
 cursor:pointer;
+font-size:15px;
 }
 
 .order{
@@ -128,16 +130,35 @@ border-radius:10px;
 </header>
 
 <div class="categories">
-<button class="active" onclick="filterProducts('All',this)">All</button>
-<button onclick="filterProducts('Women',this)">Women</button>
-<button onclick="filterProducts('Men',this)">Men</button>
-<button onclick="filterProducts('Baby Boy',this)">Baby Boy</button>
-<button onclick="filterProducts('Baby Girl',this)">Baby Girl</button>
+
+<button class="active" onclick="filterProducts('All',this)">
+All
+</button>
+
+<button onclick="filterProducts('Women',this)">
+Women
+</button>
+
+<button onclick="filterProducts('Men',this)">
+Men
+</button>
+
+<button onclick="filterProducts('Baby Boy',this)">
+Baby Boy
+</button>
+
+<button onclick="filterProducts('Baby Girl',this)">
+Baby Girl
+</button>
+
 </div>
 
 <section class="products" id="productList"></section>
 
+<!-- MODAL -->
+
 <div class="modal" id="bankModal">
+
 <div class="modal-content">
 
 <h2>Bank Details</h2>
@@ -145,9 +166,13 @@ border-radius:10px;
 <p id="orderSummary"></p>
 
 <div style="background:#F3E8FF;padding:10px;border-radius:8px;margin-top:10px;">
+
 <p><b>Bank:</b> Meezan Bank</p>
+
 <p><b>Account Title:</b> Mohsin</p>
+
 <p><b>Account Number:</b> 00300108549036</p>
+
 </div>
 
 <button class="btn order" onclick="sendToWhatsApp()">
@@ -159,6 +184,7 @@ Close
 </button>
 
 </div>
+
 </div>
 
 <script>
@@ -187,7 +213,7 @@ category:"Women"
 name:"Premium Gift Box",
 price:10000,
 desc:"Luxury Gift For Him",
-img:"https://via.placeholder.com/300x200?text=Gift+Box",
+img:"https://via.placeholder.com/300x200?text=Premium+Gift+Box",
 category:"Men"
 },
 
@@ -197,6 +223,38 @@ price:7000,
 desc:"Special Men's Gift",
 img:"https://via.placeholder.com/300x200?text=Watch+Box",
 category:"Men"
+},
+
+{
+name:"Baby Boy Basket",
+price:6500,
+desc:"Cute Baby Boy Gift",
+img:"https://via.placeholder.com/300x200?text=Baby+Boy+Basket",
+category:"Baby Boy"
+},
+
+{
+name:"Baby Boy Box",
+price:5000,
+desc:"Special Baby Boy Surprise",
+img:"https://via.placeholder.com/300x200?text=Baby+Boy+Box",
+category:"Baby Boy"
+},
+
+{
+name:"Baby Girl Basket",
+price:7000,
+desc:"Beautiful Baby Girl Gift",
+img:"https://via.placeholder.com/300x200?text=Baby+Girl+Basket",
+category:"Baby Girl"
+},
+
+{
+name:"Baby Girl Box",
+price:5500,
+desc:"Cute Baby Girl Surprise",
+img:"https://via.placeholder.com/300x200?text=Baby+Girl+Box",
+category:"Baby Girl"
 }
 
 ];
@@ -219,18 +277,24 @@ container.innerHTML += `
 
 <h3>${p.name}</h3>
 
-<div class="price">Rs ${p.price}</div>
+<div class="price">
+Rs ${p.price}
+</div>
 
 <p>${p.desc}</p>
 
 <button class="btn order"
 onclick="orderNow('${p.name}',${p.price})">
+
 Order Now
+
 </button>
 
 <button class="btn custom"
 onclick="customizeNow('${p.name}')">
+
 Customize
+
 </button>
 
 </div>
@@ -249,14 +313,18 @@ document.querySelectorAll(".categories button")
 btn.classList.add("active");
 
 if(category==="All"){
+
 displayProducts(products);
+
 }
 else{
+
 const filtered = products.filter(
 p => p.category === category
 );
 
 displayProducts(filtered);
+
 }
 
 }
@@ -278,10 +346,12 @@ document.getElementById("bankModal").style.display = "block";
 
 function customizeNow(name){
 
-let msg = "Hello! I want to customize " + name;
+let msg =
+"Hello! I want to customize " + name;
 
 window.open(
-"https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg),
+"https://wa.me/" + WHATSAPP +
+"?text=" + encodeURIComponent(msg),
 "_blank"
 );
 
@@ -293,10 +363,12 @@ let msg =
 "Paid Order%0AProduct: " +
 currentOrder.name +
 "%0APrice: Rs " +
-currentOrder.price;
+currentOrder.price +
+"%0AI have sent payment screenshot.";
 
 window.open(
-"https://wa.me/" + WHATSAPP + "?text=" + msg,
+"https://wa.me/" + WHATSAPP +
+"?text=" + msg,
 "_blank"
 );
 
@@ -305,7 +377,10 @@ closeModal();
 }
 
 function closeModal(){
-document.getElementById("bankModal").style.display = "none";
+
+document.getElementById("bankModal").style.display =
+"none";
+
 }
 
 displayProducts(products);
