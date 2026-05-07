@@ -150,28 +150,15 @@ body{background:#fff;}
 
 const products = [
   {id:"p1",name:"Chocolate Bouquet",price:12000,desc:"Sweetness Wrapped In Love",img:"product1.jpg",category:["Women","Men"]},
-
-  {id:"p2",name:"Makeup Bouquet",price:8000,desc:"A perfect surprise for every beauty lover",img:"product2.jpg",category:["Women"]},
-
-  {id:"p3",name:"12 Pair Jhumka Bouquet",price:7000,desc:"A timeless gift for every occasion",img:"product3.jpg",category:["Men"]},
-
-  {id:"p4",name:"Premium Gift Box",price:12000,desc:"Gift him something truly special",img:"product4.jpg",category:["Women","Men"]},
-
-  {id:"p5",name:"Baby Girl Basket",price:8000,desc:"Welcome your baby girl with love",img:"product5.jpg",category:["Baby Girl"]},
-
-  {id:"p6",name:"Baby Girl Basket",price:5500,desc:"Welcome your baby girl with love",img:"product6.jpg",category:["Baby Girl"]},
-
-  {id:"p7",name:"Mother's Day Basket",price:7000,desc:"Celebrate her love with something beautiful",img:"product7.jpg",category:["Women"]},
-
-  {id:"p8",name:"Hijabi Bouquet",price:7000,desc:"A graceful gift with style",img:"product8.jpg",category:["Women"]},
-
-  {id:"p9",name:"Handmade Flowers Bouquet",price:1500,desc:"Forever flowers, crafted with love",img:"product9.jpg",category:["Women","Men"]},
-
-  {id:"p10",name:"Umrah Package",price:20000,desc:"The most meaningful gift of a lifetime",img:"product10.jpg",category:["Women","Men"]},
-
-  {id:"p11",name:"Baby Girl Basket Deluxe",price:10000,desc:"Premium baby gift",img:"product11.jpg",category:["Baby Girl"]},
-
-  {id:"p12",name:"Baby Box",price:4000,desc:"Cute baby surprise box",img:"product12.jpg",category:["Baby Girl"]}
+  {id:"p2",name:"Makeup Bouquet",price:8000,desc:"Beauty Gift",img:"product2.jpg",category:["Women"]},
+  {id:"p3",name:"Jhumka Bouquet",price:7000,desc:"Traditional Gift",img:"product3.jpg",category:["Men"]},
+  {id:"p4",name:"Premium Gift Box",price:12000,desc:"Luxury Gift",img:"product4.jpg",category:["Women","Men"]},
+  {id:"p5",name:"Baby Girl Basket",price:8000,desc:"Cute Baby Gift",img:"product5.jpg",category:["Baby Girl"]},
+  {id:"p6",name:"Mother's Day Basket",price:7000,desc:"Special Gift",img:"product6.jpg",category:["Women"]},
+  {id:"p7",name:"Hijabi Bouquet",price:7000,desc:"Elegant Gift",img:"product7.jpg",category:["Women"]},
+  {id:"p8",name:"Flower Bouquet",price:1500,desc:"Handmade Flowers",img:"product8.jpg",category:["Women","Men"]},
+  {id:"p9",name:"Umrah Package",price:20000,desc:"Spiritual Gift",img:"product9.jpg",category:["Women","Men"]},
+  {id:"p10",name:"Baby Box",price:4000,desc:"Baby Gift Box",img:"product10.jpg",category:["Baby Girl"]}
 ];
 
 let currentOrder = {};
@@ -180,9 +167,9 @@ const SITE = window.location.href.split('#')[0];
 
 function displayProducts(cat="All"){
   const box = document.getElementById("productList");
-  box.innerHTML="";
+  box.innerHTML = "";
 
-  let list = cat==="All" ? products : products.filter(p=>p.category.includes(cat));
+  let list = (cat === "All") ? products : products.filter(p => p.category.includes(cat));
 
   list.forEach(p=>{
     box.innerHTML += `
@@ -204,33 +191,33 @@ function filterProducts(cat, el){
     b.classList.remove("active");
   });
 
-  if(el){
-    el.classList.add("active");
-  }
+  if(el) el.classList.add("active");
 
   displayProducts(cat);
 }
 
 function orderNow(name,price,id){
-  currentOrder={name,price,link:SITE+"#"+id};
-  document.getElementById("orderSummary").innerHTML=
-  `<b>Product:</b> ${name}<br><b>Price:</b> Rs ${price}`;
-  document.getElementById("bankModal").style.display="block";
+  currentOrder = {name,price,link:SITE+"#"+id};
+
+  document.getElementById("orderSummary").innerHTML =
+    `<b>Product:</b> ${name}<br><b>Price:</b> Rs ${price}`;
+
+  document.getElementById("bankModal").style.display = "block";
 }
 
 function customizeNow(name,id){
-  let msg=`Hello! I want to customize ${name} %0A${SITE}#${id}`;
+  let msg = `Hello! I want to customize ${name}%0A${SITE}#${id}`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`);
 }
 
 function sendToWhatsApp(){
-  let msg=`*Paid Order*%0AProduct:${currentOrder.name}%0AAmount:${currentOrder.price}%0ALink:${currentOrder.link}`;
+  let msg = `*Paid Order*%0AProduct: ${currentOrder.name}%0AAmount: ${currentOrder.price}%0ALink: ${currentOrder.link}`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`);
   closeModal();
 }
 
 function closeModal(){
-  document.getElementById("bankModal").style.display="none";
+  document.getElementById("bankModal").style.display = "none";
 }
 
 document.addEventListener("DOMContentLoaded", function(){
