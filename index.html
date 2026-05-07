@@ -102,11 +102,11 @@ body{background:#fff;color:var(--dark);}
 </header>
 
 <nav class="categories">
-  <button class="active" onclick="filterProducts('All')">All</button>
-  <button onclick="filterProducts('Women')">Women</button>
-  <button onclick="filterProducts('Men')">Men</button>
-  <button onclick="filterProducts('Baby Boy')">Baby Boy</button>
-  <button onclick="filterProducts('Baby Girl')">Baby Girl</button>
+  <button class="active" onclick="filterProducts('All', this)">All</button>
+<button onclick="filterProducts('Women', this)">Women</button>
+<button onclick="filterProducts('Men', this)">Men</button>
+<button onclick="filterProducts('Baby Boy', this)">Baby Boy</button>
+<button onclick="filterProducts('Baby Girl', this)">Baby Girl</button>
 </nav>
 
 <section class="products" id="productList"></section>
@@ -146,10 +146,11 @@ function displayProducts(cat="All"){
 }
 
 // category filter fix
-function filterProducts(cat){
+function filterProducts(cat, el){
   document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
-  event.target.classList.add("active");
+  el.classList.add("active");
   displayProducts(cat);
+}
 }
 
 function orderNow(name, price){
@@ -157,9 +158,9 @@ function orderNow(name, price){
 }
 
 // IMPORTANT FIX (DOM safe load)
-window.onload = function(){
+window.addEventListener("DOMContentLoaded", function(){
   displayProducts("All");
-};
+});
 </script>
 
 </body>
