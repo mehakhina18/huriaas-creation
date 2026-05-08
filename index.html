@@ -318,7 +318,7 @@ displayProducts(products);
 }
 else{
 const filtered = products.filter(
-p => p.category === category
+p => p.category.includes(category)
 );
 displayProducts(filtered);
 }
