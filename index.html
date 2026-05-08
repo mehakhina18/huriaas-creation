@@ -14,13 +14,6 @@ font-family:Arial;
 background:#fff;
 }
 
-header{
-background:#7B2CBF;
-color:white;
-padding:20px;
-text-align:center;
-}
-
 /* LOGO */
 .logo{
 white-space: nowrap;
@@ -151,10 +144,8 @@ border-radius:10px;
 
 <body>
 
-<!-- LOGO (FIXED POSITION) -->
 <div class="logo">Huriaa's Creations</div>
 
-<!-- CATEGORIES -->
 <div class="categories">
 
 <button class="active" onclick="filterProducts('All',this)">All</button>
@@ -165,7 +156,6 @@ border-radius:10px;
 
 </div>
 
-<!-- PRODUCTS -->
 <section class="products" id="productList"></section>
 
 <!-- MODAL -->
@@ -194,7 +184,6 @@ Close
 </button>
 
 </div>
-
 </div>
 
 <script>
@@ -203,109 +192,50 @@ const WHATSAPP = "923152950176";
 
 const products = [
 
-{
-name:"Chocolate Bouquet",
-price:12000,
-desc:"Sweetness Wrapped In Love",
-img:"product1.jpg",
-category:"Women,Men"
-},
-
-{
-name:"Makeup Bouquet",
-price:8000,
-desc:"Perfect Gift For Beauty Lover",
-img:"product2.jpg",
-category:"Women"
-},
-
-{
-name:"12 Pair Jhumka Bouqet",
-price:7000,
-desc:"Perfect Gift For Every Ocassion",
-img:"product3.jpg",
-category:"Women"
-},
-
-{
-name:"Premium Gift Box For Him",
-price:12000,
-desc:"Gift Him Something Truly Special",
-img:"product4.jpg",
-category:"Men"
-},
-
-{
-name:"Baby Girl Basket",
-price:8000,
-desc:"welcome Your Baby Girl With Love",
-img:"product5.jpg",
-category:"Baby Girl"
-},
-
-{
-name:"Baby Girl Box",
-price:6500,
-desc:"welcome Your Baby Girl With Love",
-img:"product6.jpg",
-category:"Baby Girl"
-},
-
-{
-name:"Mother's Day Basket",
-price:7000,
-desc:"Made With Love Just For Mom",
-img:"product7.jpg",
-category:"Women"
-},
-
-{
-name:"Hijabi Bouqet",
-price:7000,
-desc:"A Graceful Gift With A Touch Of Style",
-img:"product8.jpg",
-category:"Women"
-}
+{name:"Chocolate Bouquet",price:12000,desc:"Sweetness Wrapped In Love",img:"product1.jpg",category:"Women,Men"},
+{name:"Makeup Bouquet",price:8000,desc:"Perfect Gift For Beauty Lover",img:"product2.jpg",category:"Women"},
+{name:"12 Pair Jhumka Bouqet",price:7000,desc:"Perfect Gift For Every Ocassion",img:"product3.jpg",category:"Women"},
+{name:"Premium Gift Box For Him",price:12000,desc:"Gift Him Something Truly Special",img:"product4.jpg",category:"Men"},
+{name:"Baby Girl Basket",price:8000,desc:"welcome Your Baby Girl With Love",img:"product5.jpg",category:"Baby Girl"},
+{name:"Baby Girl Box",price:6500,desc:"welcome Your Baby Girl With Love",img:"product6.jpg",category:"Baby Girl"},
+{name:"Mother's Day Basket",price:7000,desc:"Made With Love Just For Mom",img:"product7.jpg",category:"Women"},
+{name:"Hijabi Bouqet",price:7000,desc:"A Graceful Gift With A Touch Of Style",img:"product8.jpg",category:"Women"}
 
 ];
 
 let currentOrder = {};
 
+/* PRODUCTS */
 function displayProducts(list){
 
 const container = document.getElementById("productList");
-
 container.innerHTML = "";
 
-list.forEach((p)=>{
+list.forEach(p=>{
 
-container.innerHTML += `
-<div class="card">
+const card = document.createElement("div");
+card.className = "card";
 
+card.innerHTML = `
 <img src="${p.img}">
 <h3>${p.name}</h3>
-
 <div class="price">Rs ${p.price}</div>
-
 <p>${p.desc}</p>
 
-<button class="btn order"
-onclick="orderNow('${p.name}',${p.price})">
-Order Now
-</button>
-
-<button class="btn custom"
-onclick="customizeNow('${p.name}')">
-Customize
-</button>
-
-</div>
+<button class="btn order">Order Now</button>
+<button class="btn custom">Customize</button>
 `;
+
+card.querySelector(".order").onclick = () => orderNow(p.name,p.price);
+card.querySelector(".custom").onclick = () => customizeNow(p.name);
+
+container.appendChild(card);
 
 });
 
 }
 
+/* FIXED FILTER (IMPORTANT) */
 function filterProducts(category,btn){
 
 document.querySelectorAll(".categories button")
@@ -315,16 +245,19 @@ btn.classList.add("active");
 
 if(category==="All"){
 displayProducts(products);
+return;
 }
-else{
-const filtered = products.filter(
-p => p.category.includes(category)
-);
+
+const filtered = products.filter(p=>{
+const cats = p.category.split(",");
+return cats.includes(category);
+});
+
 displayProducts(filtered);
-}
 
 }
 
+/* ORDER */
 function orderNow(name,price){
 
 currentOrder = {name,price};
@@ -337,6 +270,7 @@ document.getElementById("bankModal").style.display = "block";
 
 }
 
+/* CUSTOM */
 function customizeNow(name){
 
 let msg = "Hello! I want to customize " + name;
@@ -348,6 +282,7 @@ window.open(
 
 }
 
+/* WHATSAPP */
 function sendToWhatsApp(){
 
 let msg =
