@@ -642,6 +642,106 @@ document.getElementById("bankModal").style.display =
 displayProducts(products);
 
 </script>
+<!-- DESIGNER POPUP -->
+<div id="designerPopup" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:99999;
+justify-content:center;
+align-items:center;
+">
+
+<div style="
+background:white;
+width:90%;
+max-width:350px;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+animation:popupFade 0.4s ease;
+">
+
+<h2 style="
+margin-top:0;
+font-family:Georgia,serif;
+">
+Welcome To
+<br>
+Huriaa's Creations
+</h2>
+
+<p style="
+font-size:15px;
+color:#555;
+line-height:1.6;
+">
+✨ Website Designed By
+<br>
+<b>Hoori’s Design</b>
+</p>
+
+<a href="https://www.tiktok.com/@designbyhoori0?is_from_webapp=1&sender_device=pc"
+target="_blank"
+style="
+display:block;
+margin-top:15px;
+padding:10px;
+border:2px solid black;
+border-radius:30px;
+text-decoration:none;
+color:black;
+font-weight:bold;
+transition:0.3s;
+">
+Visit TikTok
+</a>
+
+<button onclick="closeDesignerPopup()" style="
+margin-top:12px;
+padding:10px 20px;
+border:none;
+border-radius:30px;
+background:black;
+color:white;
+cursor:pointer;
+font-weight:bold;
+">
+Continue Shopping
+</button>
+
+</div>
+</div>
+
+<style>
+@keyframes popupFade{
+from{
+transform:scale(0.8);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+</style>
+
+<script>
+window.onload = function(){
+setTimeout(function(){
+document.getElementById("designerPopup").style.display = "flex";
+},1500);
+};
+
+function closeDesignerPopup(){
+document.getElementById("designerPopup").style.display = "none";
+}
+</script>  
 
 </body>
 </html>
