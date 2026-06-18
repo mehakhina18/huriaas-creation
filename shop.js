@@ -61,6 +61,9 @@ function formatPrice(price) {
 
 // Renders the product grid for a single, fixed category (used on category pages).
 // imgPrefix lets sub-pages point back to the root images folder if needed.
+// Cards are intentionally minimal: image + price only. Every other detail
+// (name, description, what's included, reviews, order/customize actions)
+// lives on product.html, which opens in a new tab when the card is clicked.
 function renderGrid(cat, imgPrefix) {
   imgPrefix = imgPrefix || "";
   const grid = document.getElementById("productGrid");
@@ -79,33 +82,18 @@ function renderGrid(cat, imgPrefix) {
 
   grid.innerHTML = filtered.map((product) => {
     const badgePrice = formatPrice(product.price);
-    const includedHTML = product.included
-      ? `<div class="p-card-included"><span class="p-card-included-label">What's Included</span>${product.included}</div>`
-      : "";
-    const idx = products.indexOf(product);
     const delay = Math.min(filtered.indexOf(product) * 0.055, 0.55);
     const detailHref = `${imgPrefix}product.html?id=${product.id}`;
     return `
-      <article class="p-card card-animate" style="animation-delay:${delay}s">
-        <a href="${detailHref}" target="_blank" rel="noreferrer" class="p-card-img-wrap" style="display:block;">
+      <a href="${detailHref}" target="_blank" rel="noreferrer" class="p-card card-animate" style="animation-delay:${delay}s;text-decoration:none;display:block;">
+        <div class="p-card-img-wrap">
           <img src="${imgPrefix}${product.img}" alt="${product.name}" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#EDE9FE,#F3F0FF)';" />
           <div class="p-card-badge">${badgePrice}</div>
-        </a>
-        <div class="p-card-body">
-          <a href="${detailHref}" target="_blank" rel="noreferrer" style="text-decoration:none;">
-            <h3 class="p-card-name">${product.name}</h3>
-          </a>
-          <p class="p-card-desc">${product.desc}</p>
-          <div class="p-card-price">Rs ${product.price.toLocaleString()}</div>
-          <div class="p-card-price-label">Starting Price · DC Not Included</div>
-          <div class="p-card-divider"></div>
-          ${includedHTML}
-          <div class="p-card-actions">
-            <button class="btn-primary" onclick="openOrder(${idx})"><span>Order Now</span></button>
-            <button class="btn-outline" onclick="handleCustomize('${product.name.replace(/'/g, "\\'")}')">Customize</button>
-          </div>
         </div>
-      </article>`;
+        <div class="p-card-body" style="flex:0;">
+          <div class="p-card-price">Rs ${product.price.toLocaleString()}</div>
+        </div>
+      </a>`;
   }).join("");
 }
 
