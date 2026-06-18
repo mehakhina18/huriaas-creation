@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Admin — Huriaa's Creations</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Great+Vibes&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 50px 24px 100px; }
+    .admin-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--text-dark); margin-bottom: 6px; }
+    .admin-sub { font-family: 'Raleway', sans-serif; font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+    .admin-lock {
+      max-width: 380px; margin: 100px auto; text-align: center;
+      background: #fff; border: 1.5px solid var(--lavender-mid); border-radius: 4px; padding: 36px 28px;
+    }
+    .admin-lock input {
+      width: 100%; padding: 12px 14px; margin: 16px 0; border: 1.5px solid var(--lavender-mid);
+      border-radius: 3px; font-family: 'Raleway', sans-serif; font-size: 14px; text-align: center;
+    }
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 24px; }
+    .admin-tab {
+      padding: 10px 20px; border: 1.5px solid var(--lavender-mid); background: #fff; border-radius: 3px;
+      font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--text-muted); cursor: pointer;
+    }
+    .admin-tab.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .admin-card {
+      background: #fff; border: 1.5px solid var(--lavender-mid); border-radius: 4px;
+      padding: 18px 20px; margin-bottom: 14px;
+    }
+    .admin-card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+    .admin-card-product {
+      font-family: 'Raleway', sans-serif; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 4px;
+    }
+    .admin-card-name { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--text-dark); }
+    .admin-card-date { font-family: 'Raleway', sans-serif; font-size: 11px; color: var(--text-muted); }
+    .admin-card-comment {
+      font-family: 'Raleway', sans-serif; font-size: 13px; color: var(--text-body); line-height: 1.6;
+      margin: 10px 0 14px;
+    }
+    .admin-actions { display: flex; gap: 10px; }
+    .btn-approve, .btn-reject {
+      padding: 9px 18px; border: none; border-radius: 3px; font-family: 'Raleway', sans-serif;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    }
+    .btn-approve { background: #16794d; color: #fff; }
+    .btn-reject { background: #c0392b; color: #fff; }
+    .btn-unapprove { background: transparent; border: 1.5px solid var(--lavender-mid); color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Huriaa's</a>
+      <div class="header-tagline">Review Admin</div>
+    </div>
+  </header>
+
+  <div class="admin-lock" id="adminLock">
+    <div class="admin-title" style="font-size:22px;">Admin Access</div>
+    <p class="admin-sub">Enter your admin password to manage reviews.</p>
+    <input type="password" id="adminPassword" placeholder="Password" onkeydown="if(event.key==='Enter') checkPassword()" />
+    <button class="btn-primary" style="width:100%;padding:12px;" onclick="checkPassword()"><span>Unlock</span></button>
+    <p id="lockError" style="color:#c0392b;font-size:12px;margin-top:10px;font-family:'Raleway',sans-serif;"></p>
+  </div>
+
+  <div class="admin-wrap" id="adminWrap" style="display:none;">
+    <div class="admin-title">Review Moderation</div>
+    <div class="admin-sub">Approve reviews to make them visible on product pages.</div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="tabPending" onclick="switchTab('pending')">Pending</button>
+      <button class="admin-tab" id="tabApproved" onclick="switchTab('approved')">Approved</button>
+    </div>
+
+    <div id="reviewListWrap">
+      <p class="review-empty">Loading…</p>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="shop.js"></script>
+  <script>
+    // Simple client-side password gate.
+    // NOTE: This is a basic deterrent, not real security — Firestore rules
+    // (set separately in the Firebase console) are what actually protect the data.
+    const ADMIN_PASSWORD = "huriaa2026"; // change this to whatever you like
+
+    function checkPassword() {
+      const val = document.getElementById("adminPassword").value;
+      if (val === ADMIN_PASSWORD) {
+        document.getElementById("adminLock").style.display = "none";
+        document.getElementById("adminWrap").style.display = "block";
+        loadReviews("pending");
+      } else {
+        document.getElementById("lockError").textContent = "Incorrect password.";
+      }
+    }
+
+    let currentTab = "pending";
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById("tabPending").classList.toggle("active", tab === "pending");
+      document.getElementById("tabApproved").classList.toggle("active", tab === "approved");
+      loadReviews(tab);
+    }
+
+    async function loadReviews(status) {
+      const wrap = document.getElementById("reviewListWrap");
+      wrap.innerHTML = `<p class="review-empty">Loading…</p>`;
+      try {
+        const snap = await db.collection("reviews").where("status", "==", status).get();
+        const reviews = [];
+        snap.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }));
+        reviews.sort((a, b) => {
+          const ta = a.createdAt && a.createdAt.toMillis ? a.createdAt.toMillis() : 0;
+          const tb = b.createdAt && b.createdAt.toMillis ? b.createdAt.toMillis() : 0;
+          return tb - ta;
+        });
+
+        if (!reviews.length) {
+          wrap.innerHTML = `<p class="review-empty">No ${status} reviews.</p>`;
+          return;
+        }
+
+        wrap.innerHTML = reviews.map(r => {
+          const product = getProductById(r.productId);
+          const productName = product ? product.name : r.productId;
+          let dateStr = "";
+          try {
+            if (r.createdAt && r.createdAt.toDate) {
+              dateStr = r.createdAt.toDate().toLocaleString();
+            }
+          } catch (e) {}
+
+          const actionsHTML = status === "pending"
+            ? `<button class="btn-approve" onclick="approveReview('${r.id}')">Approve</button>
+               <button class="btn-reject" onclick="rejectReview('${r.id}')">Reject</button>`
+            : `<button class="btn-unapprove" onclick="rejectReview('${r.id}')">Remove</button>`;
+
+          return `
+            <div class="admin-card">
+              <div class="admin-card-row">
+                <div>
+                  <div class="admin-card-product">${productName}</div>
+                  <div class="admin-card-name">${r.name}</div>
+                </div>
+                <div class="admin-card-date">${dateStr}</div>
+              </div>
+              <div style="margin:8px 0;">${renderStars(r.rating, 14)}</div>
+              <p class="admin-card-comment">${r.comment}</p>
+              <div class="admin-actions">${actionsHTML}</div>
+            </div>`;
+        }).join("");
+      } catch (err) {
+        wrap.innerHTML = `<p class="review-empty">Could not load reviews. Please refresh.</p>`;
+      }
+    }
+
+    async function approveReview(id) {
+      await db.collection("reviews").doc(id).update({ status: "approved" });
+      loadReviews(currentTab);
+    }
+
+    async function rejectReview(id) {
+      await db.collection("reviews").doc(id).delete();
+      loadReviews(currentTab);
+    }
+  </script>
+</body>
+</html>
