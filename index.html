@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huriaa's Creations — Handcrafted Gifts For Every Occasion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Great+Vibes&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- SPLASH -->
+  <div class="splash-overlay" id="splash">
+    <div class="splash-monogram">Huriaa's Creations</div>
+    <div class="splash-rule"></div>
+    <div class="splash-sub">Handcrafted · With Love · For Every Occasion</div>
+    <button class="splash-enter" onclick="document.getElementById('splash').classList.add('hidden')">
+      <span>Enter Boutique</span>
+    </button>
+    <div class="splash-designer">
+      Crafted by&nbsp;
+      <a href="https://www.tiktok.com/@coded_by_hoorain" target="_blank" rel="noreferrer">codedbyhoorain</a>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Huriaa's</a>
+      <div class="header-tagline">Handcrafted With Love</div>
+      <div class="header-right">
+        <a href="https://wa.me/923152950176" target="_blank" rel="noreferrer" class="header-cta">Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Est. With Love · Pakistan</div>
+    <h1 class="hero-title">Huriaa's <span>Creations</span></h1>
+    <div class="hero-ornament">
+      <div class="hero-ornament-line"></div>
+      <div class="hero-ornament-diamond">✦ ✦ ✦</div>
+      <div class="hero-ornament-line rev"></div>
+    </div>
+    <p class="hero-sub">Every gift tells a story. Let ours be remembered forever.</p>
+  </section>
+
+  <!-- CATEGORY NAV -->
+  <nav class="cat-nav">
+    <div class="cat-nav-inner">
+      <a href="index.html" class="cat-btn active"><span class="cat-btn-icon">✦</span>All Gifts</a>
+      <a href="for-her.html" class="cat-btn"><span class="cat-btn-icon">✿</span>For Her</a>
+      <a href="for-him.html" class="cat-btn"><span class="cat-btn-icon">◈</span>For Him</a>
+      <a href="baby-boy.html" class="cat-btn"><span class="cat-btn-icon">◇</span>Baby Boy</a>
+      <a href="baby-girl.html" class="cat-btn"><span class="cat-btn-icon">◆</span>Baby Girl</a>
+    </div>
+  </nav>
+
+  <!-- SECTION HEADER -->
+  <div class="section-header">
+    <h2 class="section-title">Shop By Collection</h2>
+    <span class="section-count">4 collections</span>
+  </div>
+
+  <!-- CATEGORY TILES -->
+  <div class="tile-grid">
+    <a href="for-her.html" class="cat-tile">
+      <div class="cat-tile-icon">✿</div>
+      <div class="cat-tile-name">For Her</div>
+      <div class="cat-tile-count" id="countWomen">pieces</div>
+      <div class="cat-tile-arrow">Shop Now →</div>
+    </a>
+    <a href="for-him.html" class="cat-tile">
+      <div class="cat-tile-icon">◈</div>
+      <div class="cat-tile-name">For Him</div>
+      <div class="cat-tile-count" id="countMen">pieces</div>
+      <div class="cat-tile-arrow">Shop Now →</div>
+    </a>
+    <a href="baby-boy.html" class="cat-tile">
+      <div class="cat-tile-icon">◇</div>
+      <div class="cat-tile-name">Baby Boy</div>
+      <div class="cat-tile-count" id="countBabyBoy">pieces</div>
+      <div class="cat-tile-arrow">Shop Now →</div>
+    </a>
+    <a href="baby-girl.html" class="cat-tile">
+      <div class="cat-tile-icon">◆</div>
+      <div class="cat-tile-name">Baby Girl</div>
+      <div class="cat-tile-count" id="countBabyGirl">pieces</div>
+      <div class="cat-tile-arrow">Shop Now →</div>
+    </a>
+  </div>
+
+  <!-- SECTION HEADER -->
+  <div class="section-header">
+    <h2 class="section-title">Best Loved Pieces</h2>
+    <span class="section-count" id="sectionCount">All Gifts</span>
+  </div>
+
+  <!-- PRODUCT GRID (full catalogue) -->
+  <div class="product-grid" id="productGrid"></div>
+
+  <!-- ORDER MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div class="modal-eyebrow">Secure Your Order</div>
+        <div class="modal-title">Place Order</div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="order-item">
+          <span class="order-item-label">Item</span>
+          <span class="order-item-value" id="modalName"></span>
+        </div>
+        <div class="order-item" style="border-bottom:none;margin-bottom:4px;">
+          <span class="order-item-label">Amount</span>
+          <span class="order-item-value price" id="modalPrice"></span>
+        </div>
+        <div class="bank-card">
+          <div class="bank-card-title">Payment Details</div>
+          <div class="bank-row">
+            <span class="bank-label">Bank</span>
+            <span class="bank-value">Meezan Bank</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account Title</span>
+            <span class="bank-value">Mohsin</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account No.</span>
+            <span class="bank-value" style="letter-spacing:1.5px;">0030 0108 549036</span>
+          </div>
+        </div>
+        <p class="modal-note">
+          <strong>Note:</strong> Delivery charges are not included in the listed price and will be confirmed separately.
+        </p>
+        <div class="modal-actions">
+          <button class="btn-whatsapp" onclick="handlePaid()">✓ I Have Paid — Send Screenshot</button>
+          <button class="btn-dismiss" onclick="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-logo">Huriaa's Creations</div>
+    <div class="footer-ornament">✦ ✦ ✦</div>
+    <nav class="footer-nav">
+      <a href="index.html">All Gifts</a>
+      <a href="for-her.html">For Her</a>
+      <a href="for-him.html">For Him</a>
+      <a href="baby-boy.html">Baby Boy</a>
+      <a href="baby-girl.html">Baby Girl</a>
+    </nav>
+    <p class="footer-text">Handcrafted With Love · Every Gift Tells A Story</p>
+  </footer>
+
+  <script src="shop.js"></script>
+  <script>
+    document.getElementById("countWomen").textContent = products.filter(p => p.category.includes("Women")).length + " pieces";
+    document.getElementById("countMen").textContent = products.filter(p => p.category.includes("Men")).length + " pieces";
+    document.getElementById("countBabyBoy").textContent = products.filter(p => p.category.includes("Baby Boy")).length + " pieces";
+    document.getElementById("countBabyGirl").textContent = products.filter(p => p.category.includes("Baby Girl")).length + " pieces";
+    renderGrid("All");
+  </script>
+</body>
+</html>
