@@ -37,6 +37,7 @@ const products = [
   { id: "p34", name: "Customize Box", price: 2500, desc: "Personalized Gifts That Feel Extra Special", img: "product34.jpg", category: ["Men"] },
   { id: "p35", name: "Luxury Basket", price: 5500, desc: "Sweet Little Luxuries For Someone Special", img: "product35.jpg", category: ["Women"] },
   { id: "p36", name: "Luxury Box", price: 6500, desc: "Gift Him Something Truly Special", img: "product36.jpg", category: ["Men"], included: "Shawl, dress, ring with box, wallet, wallet card" },
+  { id: "p37", name: "Couple Mugs", price: 3000, desc: "A Sweet Set For Mr. & Mrs.", img: "product37.jpg", category: ["Women , Men"] },
 ];
 
 function getProductById(id) {
