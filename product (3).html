@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Product — Huriaa's Creations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Great+Vibes&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body style="padding-bottom:78px;">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Huriaa's</a>
+      <div class="header-tagline">Handcrafted With Love</div>
+      <div class="header-right">
+        <a href="https://wa.me/923152950176" target="_blank" rel="noreferrer" class="header-cta">Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb"><a href="index.html">Home</a> / <span id="breadcrumbName">Product</span></div>
+
+  <!-- TOP SUMMARY (image + price + title + rating, always visible) -->
+  <div class="detail-wrap" id="detailWrap">
+    <!-- Filled by JS -->
+  </div>
+
+  <!-- DARAZ-STYLE TABS -->
+  <div class="dz-tabs-wrap" id="dzTabsWrap" style="display:none;">
+    <div class="dz-tabs">
+      <button class="dz-tab active" data-tab="overview" onclick="switchDzTab('overview')">Overview</button>
+      <button class="dz-tab" data-tab="ratings" onclick="switchDzTab('ratings')">Ratings</button>
+      <button class="dz-tab" data-tab="details" onclick="switchDzTab('details')">Product Details</button>
+    </div>
+
+    <!-- OVERVIEW TAB -->
+    <div class="dz-tab-panel" id="panel-overview">
+      <div id="overviewIncludedWrap"></div>
+    </div>
+
+    <!-- RATINGS TAB -->
+    <div class="dz-tab-panel" id="panel-ratings" style="display:none;">
+      <div class="reviews-summary">
+        <div class="reviews-summary-score" id="avgScore">—</div>
+        <div class="reviews-summary-meta">
+          <div id="avgStars"></div>
+          <div class="reviews-summary-count" id="reviewCount">No reviews yet</div>
+        </div>
+      </div>
+
+      <div id="reviewsList">
+        <p class="review-empty">Loading reviews…</p>
+      </div>
+
+      <div class="review-form-card">
+        <div class="review-form-title">Leave A Review</div>
+        <div class="review-form-sub">Share your experience with this product.</div>
+        <form id="reviewForm" onsubmit="return handleReviewSubmit(event)">
+          <div class="star-picker" id="starPicker">
+            <span data-val="1">★</span>
+            <span data-val="2">★</span>
+            <span data-val="3">★</span>
+            <span data-val="4">★</span>
+            <span data-val="5">★</span>
+          </div>
+          <input type="hidden" id="ratingInput" value="0" required />
+          <input type="text" class="review-input" id="reviewName" placeholder="Your name" maxlength="60" required />
+          <textarea class="review-textarea" id="reviewComment" placeholder="Share your experience with this product…" maxlength="600" required></textarea>
+          <button type="submit" class="btn-primary" style="width:100%;padding:14px;"><span id="submitBtnText">Submit Review</span></button>
+          <p class="review-submit-note">Your review will appear right after submitting.</p>
+          <p class="review-form-msg" id="reviewMsg"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- PRODUCT DETAILS TAB -->
+    <div class="dz-tab-panel" id="panel-details" style="display:none;">
+      <table class="dz-detail-table" id="detailsTable"></table>
+    </div>
+  </div>
+
+  <!-- ORDER MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div class="modal-eyebrow">Secure Your Order</div>
+        <div class="modal-title">Place Order</div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="order-item">
+          <span class="order-item-label">Item</span>
+          <span class="order-item-value" id="modalName"></span>
+        </div>
+        <div class="order-item" style="border-bottom:none;margin-bottom:4px;">
+          <span class="order-item-label">Amount</span>
+          <span class="order-item-value price" id="modalPrice"></span>
+        </div>
+        <div class="bank-card">
+          <div class="bank-card-title">Payment Details</div>
+          <div class="bank-row">
+            <span class="bank-label">Bank</span>
+            <span class="bank-value">Meezan Bank</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account Title</span>
+            <span class="bank-value">Mohsin</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Account No.</span>
+            <span class="bank-value" style="letter-spacing:1.5px;">0030 0108 549036</span>
+          </div>
+        </div>
+        <p class="modal-note">
+          <strong>Note:</strong> Delivery charges are not included in the listed price and will be confirmed separately.
+        </p>
+        <div class="modal-actions">
+          <button class="btn-whatsapp" onclick="handlePaid()">✓ I Have Paid — Send Screenshot</button>
+          <button class="btn-dismiss" onclick="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-logo">Huriaa's Creations</div>
+    <div class="footer-ornament">✦ ✦ ✦</div>
+    <nav class="footer-nav">
+      <a href="index.html">All Gifts</a>
+      <a href="for-her.html">For Her</a>
+      <a href="for-him.html">For Him</a>
+      <a href="baby-boy.html">Baby Boy</a>
+      <a href="baby-girl.html">Baby Girl</a>
+    </nav>
+    <p class="footer-text">Handcrafted With Love · Every Gift Tells A Story</p>
+  </footer>
+
+  <!-- STICKY BOTTOM ACTION BAR (Daraz-style) -->
+  <div class="dz-sticky-bar" id="dzStickyBar" style="display:none;">
+    <button class="btn-outline dz-sticky-btn" id="stickyCustomizeBtn">Customize</button>
+    <button class="btn-primary dz-sticky-btn" id="stickyOrderBtn"><span>Order Now</span></button>
+  </div>
+
+  <!-- Firebase SDK (compat, no build step needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="shop.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    const product = productId ? getProductById(productId) : null;
+
+    function renderNotFound() {
+      document.getElementById("detailWrap").innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;">
+          <span class="empty-state-icon">✦</span>
+          <p class="empty-state-text">We couldn't find that product.</p>
+          <a href="index.html" class="header-cta" style="margin-top:18px;display:inline-block;">Back To Shop</a>
+        </div>`;
+    }
+
+    function switchDzTab(tab) {
+      document.querySelectorAll(".dz-tab").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-tab") === tab);
+      });
+      document.querySelectorAll(".dz-tab-panel").forEach(panel => {
+        panel.style.display = panel.id === "panel-" + tab ? "block" : "none";
+      });
+    }
+
+    if (!product) {
+      renderNotFound();
+    } else {
+      document.title = product.name + " — Huriaa's Creations";
+      document.getElementById("pageTitle").textContent = product.name + " — Huriaa's Creations";
+      document.getElementById("breadcrumbName").textContent = product.name;
+
+      // Build the full media list: main image, any extra images, then video last.
+      const allImages = [product.img, ...(product.extraImages || [])].filter(Boolean);
+      const hasVideo = !!(product.video && product.video.trim());
+
+      const imgSlidesHTML = allImages.map((src, i) => `
+        <img class="media-slide" data-media-index="${i}" src="${src}" alt="${product.name}"
+             style="${i === 0 ? 'display:block;' : 'display:none;'}"
+             onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#EDE9FE,#F3F0FF)';" />
+      `).join("");
+
+      const videoSlideHTML = hasVideo
+        ? `<video class="media-slide" id="mediaVideo" controls playsinline poster="${product.img}" style="display:none;width:100%;height:100%;object-fit:contain;">
+             <source src="${product.video}" type="video/mp4" />
+             Your browser doesn't support video playback.
+           </video>`
+        : "";
+
+      let toggleButtonsHTML = allImages.map((src, i) => `
+        <button class="media-toggle-btn ${i === 0 ? 'active' : ''}" data-mode="img-${i}" onclick="switchMedia('img-${i}')">📷 Photo${allImages.length > 1 ? " " + (i + 1) : ""}</button>
+      `).join("");
+      if (hasVideo) {
+        toggleButtonsHTML += `<button class="media-toggle-btn" data-mode="video" onclick="switchMedia('video')">▶ Video</button>`;
+      }
+      const showToggle = allImages.length > 1 || hasVideo;
+
+      document.getElementById("detailWrap").innerHTML = `
+        <div>
+          <div class="detail-img-wrap">
+            ${imgSlidesHTML}
+            ${videoSlideHTML}
+          </div>
+          ${showToggle ? `<div class="media-toggle" id="mediaToggle">${toggleButtonsHTML}</div>` : ""}
+        </div>
+        <div>
+          <h1 class="detail-name">${product.name}</h1>
+          <div class="detail-rating-row">
+            <span id="detailStars">${renderStars(0, 16)}</span>
+            <span class="detail-rating-count" id="detailRatingCount">No reviews yet</span>
+          </div>
+          <div class="detail-price">Rs ${product.price.toLocaleString()}</div>
+          <p class="detail-desc-top">${product.desc}</p>
+        </div>
+      `;
+
+      window.switchMedia = function (mode) {
+        document.querySelectorAll(".media-slide").forEach(el => { el.style.display = "none"; });
+        const videoEl = document.getElementById("mediaVideo");
+        if (videoEl) videoEl.pause();
+
+        document.querySelectorAll(".media-toggle-btn").forEach(btn => {
+          btn.classList.toggle("active", btn.getAttribute("data-mode") === mode);
+        });
+
+        if (mode === "video") {
+          if (videoEl) videoEl.style.display = "block";
+        } else {
+          const idx = mode.split("-")[1];
+          const target = document.querySelector(`.media-slide[data-media-index="${idx}"]`);
+          if (target) target.style.display = "block";
+        }
+      };
+
+      if (product.included) {
+        document.getElementById("overviewIncludedWrap").innerHTML = `
+          <div class="detail-included"><span class="detail-included-label">What's Included</span>${product.included}</div>`;
+      }
+
+      const rows = [
+        ["Category", product.category.join(", ")],
+        ["Price", "Rs " + product.price.toLocaleString()],
+        ["Delivery", "Charges confirmed separately based on location"],
+      ];
+      if (product.included) rows.push(["Included Items", product.included]);
+      document.getElementById("detailsTable").innerHTML = rows.map(([k, v]) => `
+        <tr><td class="dz-detail-key">${k}</td><td class="dz-detail-val">${v}</td></tr>
+      `).join("");
+
+      document.getElementById("dzTabsWrap").style.display = "block";
+
+      const stickyBar = document.getElementById("dzStickyBar");
+      stickyBar.style.display = "flex";
+      document.getElementById("stickyOrderBtn").onclick = () => openOrder(product.id);
+      document.getElementById("stickyCustomizeBtn").onclick = () => handleCustomize(product.name);
+
+      let approvedReviews = [];
+
+      async function loadReviews() {
+        try {
+          approvedReviews = await fetchApprovedReviews(product.id);
+        } catch (e) {
+          approvedReviews = [];
+        }
+        const { avg, count } = computeAverageRating(approvedReviews);
+
+        document.getElementById("avgScore").textContent = count ? avg.toFixed(1) : "—";
+        document.getElementById("avgStars").innerHTML = renderStars(avg, 16);
+        document.getElementById("reviewCount").textContent = count ? `${count} review${count > 1 ? "s" : ""}` : "No reviews yet";
+        document.getElementById("detailStars").innerHTML = renderStars(avg, 16);
+        document.getElementById("detailRatingCount").textContent = count ? `${count} review${count > 1 ? "s" : ""}` : "No reviews yet";
+
+        const listEl = document.getElementById("reviewsList");
+        if (!count) {
+          listEl.innerHTML = `<p class="review-empty">Be the first to review this product.</p>`;
+          return;
+        }
+        listEl.innerHTML = approvedReviews.map(r => {
+          let dateStr = "";
+          try {
+            if (r.createdAt && r.createdAt.toDate) {
+              dateStr = r.createdAt.toDate().toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+            }
+          } catch (e) {}
+          return `
+            <div class="review-card">
+              <div class="review-card-head">
+                <span class="review-card-name">${r.name}</span>
+                <span class="review-card-date">${dateStr}</span>
+              </div>
+              <div style="margin-bottom:6px;">${renderStars(r.rating, 13)}</div>
+              <p class="review-card-comment">${r.comment}</p>
+            </div>`;
+        }).join("");
+      }
+
+      loadReviews();
+
+      const starPicker = document.getElementById("starPicker");
+      const ratingInput = document.getElementById("ratingInput");
+      starPicker.querySelectorAll("span").forEach(starEl => {
+        starEl.addEventListener("click", () => {
+          const val = Number(starEl.getAttribute("data-val"));
+          ratingInput.value = val;
+          starPicker.querySelectorAll("span").forEach(s => {
+            s.classList.toggle("selected", Number(s.getAttribute("data-val")) <= val);
+          });
+        });
+      });
+
+      window.handleReviewSubmit = async function (e) {
+        e.preventDefault();
+        const msgEl = document.getElementById("reviewMsg");
+        const rating = Number(ratingInput.value);
+        const name = document.getElementById("reviewName").value.trim();
+        const comment = document.getElementById("reviewComment").value.trim();
+        const submitBtn = document.getElementById("submitBtnText");
+
+        msgEl.className = "review-form-msg";
+        msgEl.textContent = "";
+
+        if (!rating) {
+          msgEl.className = "review-form-msg error";
+          msgEl.textContent = "Please select a star rating.";
+          return false;
+        }
+        if (!name || !comment) {
+          msgEl.className = "review-form-msg error";
+          msgEl.textContent = "Please fill in your name and a short review.";
+          return false;
+        }
+
+        submitBtn.textContent = "Submitting…";
+        try {
+          await submitReview(product.id, name, rating, comment);
+          msgEl.className = "review-form-msg success";
+          msgEl.textContent = "Thank you! Your review has been posted.";
+          document.getElementById("reviewForm").reset();
+          ratingInput.value = 0;
+          starPicker.querySelectorAll("span").forEach(s => s.classList.remove("selected"));
+          await loadReviews();
+        } catch (err) {
+          console.error("Review submit failed:", err);
+          msgEl.className = "review-form-msg error";
+          msgEl.textContent = "Something went wrong. Please try again in a moment.";
+        }
+        submitBtn.textContent = "Submit Review";
+        return false;
+      };
+    }
+  </script>
+</body>
+</html>
