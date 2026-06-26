@@ -39,6 +39,7 @@ const products = [
   { id: "p36", name: "Luxury Box", price: 6500, desc: "Gift Him Something Truly Special", img: "product36.jpg", category: ["Men"], included: "Shawl, dress, ring with box, wallet, wallet card" },
   { id: "p37", name: "Couple Mugs", price: 3000, desc: "A Sweet Set For Mr. & Mrs.", img: "product37.jpg", category: ["Women , Men"] },
  { id: "p38", name: "Premium Men's Watch Gift Set (6 Watches)", price: 12000, desc: "Style Meets Elegance with This 6-Watch Collection", img: "product38.jpg", extraImages: ["product38-photo2.jpg"], video: "product38-video.mp4", category: ["Men","Women"] },
+  { id: "p39", name: "The Forever Frame", price: 2000, desc: "A timeless Nikah frame designed to beautifully preserve your special day.", img: "product39.jpg", extraImages: ["product39-photo2.jpg"], category: ["Men","Women"] },
 ];
 
 function getProductById(id) {
