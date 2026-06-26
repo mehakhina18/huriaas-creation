@@ -41,6 +41,9 @@ const products = [
  { id: "p38", name: "Premium Men's Watch Gift Set (6 Watches)", price: 12000, desc: "Style Meets Elegance with This 6-Watch Collection", img: "product38.jpg", extraImages: ["product38-photo2.jpg"], video: "product38-video.mp4", category: ["Men","Women"] },
  { id: "p39", name: "The Forever Frame", price: 2000, desc: "A timeless Nikah frame designed to beautifully preserve your special day.", img: "product39.jpg", extraImages: ["product39-photo2.jpg"], category: ["Men","Women"] },
   { id: "p40", name: "Pamper Bouquet", price: 4000, desc: "More than a bouquet—it's a bundle of love, surprises, and smiles..", img: "product40.jpg", extraImages: ["product40-photo2.jpg"], category: ["Women"] },
+ { id: "p41", name: "Little Sunshine Basket", price: 9000, desc: "Celebrate a new beginning with a beautifully handcrafted baby gift basket.", img: "product41.jpg", extraImages: ["product41-photo2.jpg"], category: ["Baby Boy","Baby Girl"] }, 
+ { id: "p42", name: "Pop of Sweetness Bouquet", price: 3500, desc: "A playful gift bouquet bursting with color, sweetness, and joy.", img: "product42.jpg", extraImages: ["product42-photo2.jpg"], category: ["Baby Boy","Baby Girl"] }, 
+   
 ];
 
 function getProductById(id) {
