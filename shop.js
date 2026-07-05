@@ -43,7 +43,13 @@ const products = [
   { id: "p40", name: "Pamper Bouquet", price: 4000, desc: "More than a bouquet—it's a bundle of love, surprises, and smiles..", img: "product40.jpg", extraImages: ["product40-photo2.jpg"], category: ["Women"] },
  { id: "p41", name: "Little Sunshine Basket", price: 9000, desc: "Celebrate a new beginning with a beautifully handcrafted baby gift basket.", img: "product41.jpg", extraImages: ["product41-photo2.jpg"], category: ["Baby Boy","Baby Girl"] }, 
  { id: "p42", name: "Pop of Sweetness Bouquet", price: 3500, desc: "A playful gift bouquet bursting with color, sweetness, and joy.", img: "product42.jpg", extraImages: ["product42-photo2.jpg"], category: ["Baby Boy","Baby Girl"] }, 
-   
+ { id: "p43", name: "Birthday Bliss Basket", price: 6000, desc: "Thoughtfully curated to make every birthday extra special.", img: "product43.jpg", extraImages: ["product43-photo2.jpg"], category: ["Women","Men"] }, 
+ { id: "p44", name: "Eternal Promise Gift Set", price:2000, desc: "A timeless keepsake to celebrate love and new beginnings.", img: "product44.jpg", extraImages: ["product44-photo2.jpg"], category: ["Women","Men"] },
+ { id: "p45", name: "Royal Money Bouquet", price:7500, desc: "An elegant way to gift love, blessings, and cash.", img: "product45.jpg", extraImages: ["product45-photo2.jpg"], category: ["Baby Boy","Baby Girl"] }, 
+ { id: "p46", name: "Royal Blue Bloom", price:8000, desc: "Luxury wrapping with cash, chocolates, and thoughtful details.", img: "product46.jpg", extraImages: ["product46-photo2.jpg"], category: ["Baby Boy"] },       
+ { id: "p47", name: "Majestic Bloom", price:8000, desc: "Handcrafted to make every celebration unforgettable.", img: "product47.jpg", extraImages: ["product47-photo2.jpg"], category: ["Baby Girl"] }, 
+  { id: "p48", name: "Frozen Fantasy Basket", price:7000, desc: "Packed with fun, smiles, and birthday surprises for little ones.", img: "product48.jpg", extraImages: ["product48-photo2.jpg"], category: ["Baby Girl"] }, 
+  { id: "p49", name: "Little Princess Express", price:15000, desc: "A handcrafted gift train filled with love, surprises, and endless smiles.", img: "product49.jpg", extraImages: ["product49-photo2.jpg"], category: ["Baby Girl"] }, 
 ];
 
 function getProductById(id) {
